@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { TypeAnimation } from 'react-type-animation';
 import './App.css';
 
 function App() {
   const [value, setValue] = useState<string>('Waiting on value');
 
-  useEffect(() => {
-    fetch('http://localhost:8080/college-essay')
+  function submit(){
+    fetch('http://localhost:8080/college-essay', {method: 'POST', body: JSON.stringify({a: "Data for ChatGPT", b: "Data for ChatGPT"})})
         .then((response) => response.json())
-        .then((data) => setValue(data.body));
+        .then((data) => {setValue(data.body)});
+  }
+
+  useEffect(() => {
+    
   }, []);
 
   return (
@@ -16,7 +21,19 @@ function App() {
         <input type="textarea" 
           name="textValue"
         />
-        <div className="response">{value}</div>
+        <button onClick={submit} >Send the data</button>
+        <br></br>
+        <br></br>
+        <div>{value}</div>
+        <br></br>
+        <TypeAnimation 
+          sequence={[
+            'This will be the typing animation of the response, eventually.',
+          ]}
+          speed={70}
+          wrapper="div"
+        />
+      
     </div>
   );
 }
