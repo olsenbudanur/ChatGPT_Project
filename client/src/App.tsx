@@ -1,68 +1,70 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { TypeAnimation } from 'react-type-animation';
-import './App.css';
-
-
+import React, { useEffect, useRef, useState } from "react";
+import "./App.css";
 
 function App() {
-  const [ChatGPTMessage, setChatGPTMessage] = useState<string>("");
-  const [value, setValue] = useState<string>("");
+	const [ChatGPTMessage, setChatGPTMessage] = useState<string>("");
+	const [value, setValue] = useState<string>("");
 
+	async function submit() {
+		//
+		// Kill all other runs that might be happening.
+		var highestTimeoutId = setTimeout(";");
+		for (var i = 0; i < highestTimeoutId; i++) {
+			clearTimeout(i);
+		}
 
-  async function submit(){
+		setValue("Response is loading.");
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+		myHeaders.append("Accept", "application/json");
+		myHeaders.append("Origin", "http://localhost:3000");
 
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('Accept', 'application/json');
-    myHeaders.append('Origin','http://localhost:3000');
-  
-  
-  var raw = JSON.stringify({
-    "ChatGPTMessage": ChatGPTMessage,
-  });
-  
-  var requestOptions: RequestInit = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow',
-    mode: 'cors'
-  };
-  
-  fetch("http://localhost:8080/college-essay", requestOptions)
-    .then(response => response.json())
-    .then( data => setValue(data.body))
-    .catch(error => console.log('error', error));
-  }
+		var raw = JSON.stringify({
+			prompt: ChatGPTMessage,
+		});
 
+		var requestOptions: RequestInit = {
+			method: "POST",
+			headers: myHeaders,
+			body: raw,
+			redirect: "follow",
+			mode: "cors",
+		};
+		let index = 0;
+		fetch("http://localhost:8080/college-essay", requestOptions)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data.body);
+				setValue("");
+				index = -1;
+				let interval = setInterval(() => {
+					if (index < data.body.length) {
+						setValue(
+							(value) =>
+								(value +=
+									data.body.charAt(index))
+						);
+						index++;
+					} else {
+						clearInterval(interval);
+					}
+				}, 20);
+			})
+			.catch((error) => console.log("error", error));
+	}
 
-
-
-  
-
-
-  useEffect(() => {}, []);
-
-  return (
-    
-    <div className="App">
-        <input type="textarea" 
-          name="textValue"
-          onChange={(e) => setChatGPTMessage(e.target.value)}
-        />
-        <button onClick={submit} >Send the data</button>
-        <div>{value}</div>
-        <br></br>
-        <TypeAnimation 
-          sequence={[
-            'This will be the typing animation of the response, eventually.',
-          ]}
-          speed={70}
-          wrapper="div"
-        />
-      
-    </div>
-  );
+	return (
+		<div className="App">
+			<input
+				type="textarea"
+				name="textValue"
+				onChange={(e) => setChatGPTMessage(e.target.value)}
+			/>
+			<button onClick={submit}>Send the data</button>
+			<div>{value}</div>
+			<br></br>
+		</div>
+	);
 }
 
 export default App;
