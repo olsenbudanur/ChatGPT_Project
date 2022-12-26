@@ -1,11 +1,10 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon 'ts-node' src/server.tsx"
+    "start": "nodemon 'ts-node' src/server.ts"
   },
   "keywords": [],
   "author": "",
