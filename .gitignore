@@ -2,4 +2,4 @@
 chatgpt.env
 *.env
 .env
-client/node_modules/.cache/
+/node_modules
