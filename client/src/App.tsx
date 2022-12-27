@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import TestingPage from "./pages/TestingPage";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 	return (
