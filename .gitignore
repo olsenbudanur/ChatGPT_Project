@@ -1,5 +1,5 @@
+node_modules
 .DS_Store
 chatgpt.env
 *.env
 .env
-client/node_modules/.cache/
