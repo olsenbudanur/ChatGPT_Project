@@ -10,9 +10,15 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
 
 import * as S from "./Home.styles";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
 	const [pageCount, setPageCount] = React.useState("2");
+	const navigate = useNavigate();
+
+	const navigateToPrompt = () => {
+		navigate("/prompt");
+	};
 
 	const handleChange = (event: SelectChangeEvent) => {
 		setPageCount(event.target.value);
@@ -75,6 +81,7 @@ function Home() {
 							borderRadius: 10,
 						}}
 						variant="contained"
+						onClick={navigateToPrompt}
 					>
 						Submit
 					</Button>
