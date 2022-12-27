@@ -24,7 +24,7 @@ function Home() {
 	const [pageCount, setPageCount] = useState("2");
 	const [email, setEmail] = useState("");
 	const [emailError, setEmailError] = useState<boolean>(true);
-	const { signUp }: any = useAuth();
+	const { signUp, linkSignIn }: any = useAuth();
 
 	const navigate = useNavigate();
 
@@ -47,8 +47,9 @@ function Home() {
 			//
 			// Need to send a OTP to the user here.
 			alert(
-				"This user already exists. I will deal with this case later"
+				"This user already exists. Please log in through the link sent to your email"
 			);
+			linkSignIn(email);
 		} else {
 			// //
 			// // Create a user on the fly with just email...
