@@ -33,7 +33,7 @@ function Home() {
           </S.SubTitle>
         </S.TextWrapper>
         <S.LoginWrapper>
-          <S.BoiBussy>Boi Bussy</S.BoiBussy>
+          <S.BoiBussy>Boi Bussie</S.BoiBussy>
           <TextField
             label="Email"
             fullWidth
