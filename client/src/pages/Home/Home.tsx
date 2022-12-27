@@ -8,44 +8,109 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
-
 import * as S from "./Home.styles";
 import { useNavigate } from "react-router-dom";
 
+//
+// This code should be seperated later
+import {
+	createUserWithEmailAndPassword,
+	fetchSignInMethodsForEmail,
+} from "firebase/auth";
+import { auth } from "../../firebase";
+import { useAuth } from "../../components/Context/AuthContext";
+
 function Home() {
-	const [pageCount, setPageCount] = React.useState("2");
+	const [pageCount, setPageCount] = useState("2");
+	const [email, setEmail] = useState("");
+	const [emailError, setEmailError] = useState<boolean>(true);
+	const { signUp }: any = useAuth();
+
 	const navigate = useNavigate();
 
-	const navigateToPrompt = () => {
-		navigate("/prompt");
+	const navigateToPrompt = async () => {
+		//
+		// Check if the email has an account already,
+		// if it does, handle that case later with
+		// email link log in.
+		//
+		// Otherwise, generate a new password, and create
+		// a firebase account with the said password.
+		// then auto log in and go to the prompt page.
+		//
+		// The password is just a filler, and is irrelevent.
+
+		//
+		// If this user exists..
+		const methods = await fetchSignInMethodsForEmail(auth, email);
+		if (methods.includes("password")) {
+			//
+			// Need to send a OTP to the user here.
+			alert(
+				"This user already exists. I will deal with this case later"
+			);
+		} else {
+			// //
+			// // Create a user on the fly with just email...
+			signUp(email)
+				.then((userCredential: any) => {
+					// Signed in
+					const user = userCredential.user;
+					console.log(user);
+					navigate("/prompt");
+				})
+				.catch((error: any) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					console.log(errorCode, errorMessage);
+				});
+		}
 	};
 
-	const handleChange = (event: SelectChangeEvent) => {
+	const handleCountChange = (event: any) => {
 		setPageCount(event.target.value);
+	};
+
+	const handleEmailChange = (event: any) => {
+		setEmail(event.target.value);
+		//
+		// Validate the email using a regular expression
+		const emailRegex =
+			/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+		if (emailRegex.test(email)) {
+			setEmailError(false);
+		} else {
+			setEmailError(true);
+		}
 	};
 
 	return (
 		<S.Wrapper>
 			<S.TextLoginWrapper>
 				<S.TextWrapper>
-					<S.Title>Biz isi biliyoruz</S.Title>
+					<S.Title>
+						Too Tired to Write Your College Essay?
+					</S.Title>
 					<S.SubTitle>
-						Ananin Ami Ananin AmiAnanin AmiAnanin
-						AmiAnanin AmiAnanin
+						Write your essay using the same AI model
+						that powers ChatGPT in a matter of minutes!
 					</S.SubTitle>
 
-					<S.Title>Biz isi biliyoruz</S.Title>
+					<S.Title>Try Now!</S.Title>
 					<S.SubTitle>
-						Ananin Ami Ananin AmiAnanin AmiAnanin
-						AmiAnanin AmiAnanin
+						Enter some basic information, and watch the
+						AI write your essay!
 					</S.SubTitle>
 				</S.TextWrapper>
 				<S.LoginWrapper>
 					<S.BoiBussy>Boi Bussie</S.BoiBussy>
+
 					<TextField
-						label="Email"
+						label="Please Enter your Email"
 						fullWidth
-						error={false}
+						value={email}
+						error={emailError}
+						onChange={handleEmailChange}
 						placeholder="Your Email..."
 					/>
 					<S.PagesWrapper>
@@ -54,7 +119,7 @@ function Home() {
 							<Select
 								value={pageCount}
 								label="Page Count"
-								onChange={handleChange}
+								onChange={handleCountChange}
 								fullWidth
 							>
 								<MenuItem value={1}>1</MenuItem>
@@ -82,6 +147,7 @@ function Home() {
 						}}
 						variant="contained"
 						onClick={navigateToPrompt}
+						disabled={emailError}
 					>
 						Submit
 					</Button>
