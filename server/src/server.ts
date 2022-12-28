@@ -3,15 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { Configuration, OpenAIApi } from "openai";
 import dotenv from "dotenv";
-import generator from "generate-password";
 
-var passwords = generator.generate({
-	length: 15,
-	uppercase: true,
-    symbols: true
-});
-
-console.log(passwords);
 
 //
 // Set up express

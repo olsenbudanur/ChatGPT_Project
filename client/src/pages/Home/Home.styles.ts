@@ -23,6 +23,7 @@ export const TextLoginWrapper = styled.div`
     grid-template-columns: none;
     width: 80%;
     grid-template-rows: 1fr 1fr;
+    grid-gap: 0px;
   }
 `;
 
@@ -65,6 +66,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const LoginHeader = styled.h1`
+  margin-bottom: 0px;
   color: black;
 `;
 
