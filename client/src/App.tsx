@@ -15,19 +15,20 @@ function App() {
 				<Navbar />
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/test" element={<PrivateRoute />}>
-						<Route
-							path="/test"
-							element={<TestingPage />}
-						/>
-					</Route>
 					<Route path="/prompt" element={<PrivateRoute />}>
 						<Route
 							path="/prompt"
 							element={<Prompt />}
 						/>
 					</Route>
+					<Route path="/test" element={<PrivateRoute />}>
+						<Route
+							path="/test"
+							element={<TestingPage />}
+						/>
+					</Route>
 					<Route path="/login" element={<Login />} />
+					<Route path="/*" element={<Home />} />
 				</Routes>
 			</AuthProvider>
 		</Router>

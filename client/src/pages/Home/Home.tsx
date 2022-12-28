@@ -40,7 +40,7 @@ function Home() {
 		//
 		// If this user exists..
 		const methods = await fetchSignInMethodsForEmail(auth, email);
-		if (methods.includes("password")) {
+		if (methods.length > 0) {
 			//
 			// Need to send a OTP to the user here.
 			alert(
