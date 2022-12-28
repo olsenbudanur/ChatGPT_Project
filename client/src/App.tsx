@@ -4,21 +4,21 @@ import TestingPage from "./pages/A4";
 import Navbar from "./components/Navbar/Navbar";
 import Prompt from "./pages/Prompt";
 import Footer from "./components/Footer/Footer";
-import { AuthProvider } from "./components/Context/AuthContext";
+import { AuthProvider, useAuth } from "./components/Context/AuthContext";
 
 function App() {
-  return (
-    <AuthProvider>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/prompt" element={<TestingPage />} />
-          <Route path="/test" element={<Prompt />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
+	return (
+		<Router>
+			<AuthProvider>
+				<Navbar />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/test" element={<TestingPage />} />
+					<Route path="/prompt" element={<Prompt />} />
+				</Routes>
+			</AuthProvider>
+		</Router>
+	);
 }
 
 export default App;
