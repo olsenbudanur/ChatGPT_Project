@@ -7,18 +7,18 @@ import Footer from "./components/Footer/Footer";
 import { AuthProvider } from "./components/Context/AuthContext";
 
 function App() {
-	return (
-		<AuthProvider>
-			<Router>
-				<Navbar />
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/prompt" element={<TestingPage />} />
-					<Route path="/test" element={<Prompt />} />
-				</Routes>
-			</Router>
-		</AuthProvider>
-	);
+  return (
+    <AuthProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/prompt" element={<TestingPage />} />
+          <Route path="/test" element={<Prompt />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
 }
 
 export default App;
