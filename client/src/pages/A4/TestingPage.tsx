@@ -1,9 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../components/Context/AuthContext";
 import * as S from "./TestingPage.styles";
 
 function TestingPage() {
 	const [ChatGPTMessage, setChatGPTMessage] = useState<string>("");
 	const [value, setValue] = useState<string>("");
+	const { currentUser } = useAuth();
+	const navigate = useNavigate();
+
+	//
+	// If not logged in..
+	React.useEffect(() => {
+		if (!currentUser) {
+			navigate("/");
+		}
+	}, []);
 
 	async function submit() {
 		//

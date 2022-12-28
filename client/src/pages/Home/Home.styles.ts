@@ -64,6 +64,15 @@ export const ButtonWrapper = styled.div`
   width: 100%;
 `;
 
-export const BoiBussy = styled.h1`
+export const LoginHeader = styled.h1`
   color: black;
 `;
+
+
+
+export const CurrUser = styled.h4`
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  color: black;
+`

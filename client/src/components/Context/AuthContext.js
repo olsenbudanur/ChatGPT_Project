@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
+
 import {
 	createUserWithEmailAndPassword,
 	sendSignInLinkToEmail,
+	signOut,
 } from "firebase/auth";
 import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+
 const AuthContext = React.createContext();
 
 export function useAuth() {
@@ -14,6 +18,8 @@ export function useAuth() {
 // Reference this video: https://www.youtube.com/watch?v=PKwu15ldZ7k&t=1s
 export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState();
+	const [loading, setLoading] = useState(true);
+	const navigate = useNavigate();
 	//
 	// New user signs on thru this method.
 	function signUp(email) {
@@ -29,6 +35,11 @@ export function AuthProvider({ children }) {
 		}
 
 		return createUserWithEmailAndPassword(auth, email, password);
+	}
+
+	function logOut() {
+		navigate("/");
+		return auth.signOut();
 	}
 
 	//
@@ -73,6 +84,7 @@ export function AuthProvider({ children }) {
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setCurrentUser(user);
+			setLoading(false);
 		});
 		return unsubscribe;
 	}, []);
@@ -81,11 +93,12 @@ export function AuthProvider({ children }) {
 		currentUser,
 		signUp,
 		linkSignIn,
+		logOut,
 	};
 
 	return (
 		<AuthContext.Provider value={value}>
-			{children}
+			{!loading && children}
 		</AuthContext.Provider>
 	);
 }
