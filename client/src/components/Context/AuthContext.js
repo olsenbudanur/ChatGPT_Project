@@ -62,7 +62,7 @@ export function AuthProvider({ children }) {
 		// 	dynamicLinkDomain: "mementomemories.com",
 		// };
 		const actionCodeSettings = {
-			url: "http://localhost:3000/login", // Replace with the URL of your login page
+			url: "http://localhost:3000/prompt", // Replace with the URL of your login page
 			handleCodeInApp: true,
 		};
 		sendSignInLinkToEmail(auth, email, actionCodeSettings)
