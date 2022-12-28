@@ -6,6 +6,7 @@ import Prompt from "./pages/Prompt";
 import Footer from "./components/Footer/Footer";
 import { AuthProvider, useAuth } from "./components/Context/AuthContext";
 import PrivateRoute from "./components/Routing/PrivateRoute";
+import Login from "./pages/Login";
 
 function App() {
 	return (
@@ -14,7 +15,6 @@ function App() {
 				<Navbar />
 				<Routes>
 					<Route path="/" element={<Home />} />
-
 					<Route path="/test" element={<PrivateRoute />}>
 						<Route
 							path="/test"
@@ -27,6 +27,7 @@ function App() {
 							element={<Prompt />}
 						/>
 					</Route>
+					<Route path="/login" element={<Login />} />
 				</Routes>
 			</AuthProvider>
 		</Router>

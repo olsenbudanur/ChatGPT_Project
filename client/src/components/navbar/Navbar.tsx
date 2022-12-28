@@ -14,12 +14,14 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth } from "../Context/AuthContext";
 import { Logout } from "@mui/icons-material";
-
+import { useNavigate } from "react-router-dom";
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
 	const { signUp, linkSignIn, currentUser, logOut }: any = useAuth();
+	const navigate = useNavigate();
+
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
 		null
 	);
@@ -40,6 +42,10 @@ function Navbar() {
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
 	};
+
+	function navigateLogin() {
+		navigate("/login");
+	}
 
 	return (
 		<AppBar position="sticky">
@@ -179,6 +185,20 @@ function Navbar() {
 									color="inherit"
 								>
 									Log Out
+								</Button>
+							)}
+							{!currentUser && (
+								<Button
+									onClick={navigateLogin}
+									sx={{
+										my: 2,
+										background: "blue",
+										color: "white",
+										display: "block",
+									}}
+									color="inherit"
+								>
+									Log In
 								</Button>
 							)}
 						</Toolbar>
