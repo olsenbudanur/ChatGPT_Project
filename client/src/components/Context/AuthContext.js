@@ -4,7 +4,11 @@ import {
 	createUserWithEmailAndPassword,
 	sendSignInLinkToEmail,
 	signOut,
+	isSignInWithEmailLink,
+	getAuth,
+	signInWithEmailLink,
 } from "firebase/auth";
+
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -62,7 +66,7 @@ export function AuthProvider({ children }) {
 		// 	dynamicLinkDomain: "mementomemories.com",
 		// };
 		const actionCodeSettings = {
-			url: "http://localhost:3000/prompt", // Replace with the URL of your login page
+			url: "http://localhost:3000/login", // Replace with the URL of your login page
 			handleCodeInApp: true,
 		};
 		sendSignInLinkToEmail(auth, email, actionCodeSettings)
@@ -81,6 +85,18 @@ export function AuthProvider({ children }) {
 			});
 	}
 
+	function linkSignInComplete() {
+		if (isSignInWithEmailLink(auth, window.location.href)) {
+			signInWithEmailLink(
+				auth,
+				"olsenbudanur@gmail.com",
+				window.location.href
+			).then((result) => {
+				navigate("/");
+			});
+		}
+	}
+
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {
 			setCurrentUser(user);
@@ -94,6 +110,7 @@ export function AuthProvider({ children }) {
 		signUp,
 		linkSignIn,
 		logOut,
+		linkSignInComplete,
 	};
 
 	return (
