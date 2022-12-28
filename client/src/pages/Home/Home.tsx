@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import BasicModal from "../LoadingModal/LoadingModal";
 import TextField from "@mui/material/TextField";
 import { Navbar } from "react-bootstrap";
 import Footer from "../../components/Footer/Footer";
