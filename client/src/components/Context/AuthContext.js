@@ -48,28 +48,13 @@ export function AuthProvider({ children }) {
 
 	//
 	// Work-in-progress. Not complete yet.
-	function linkSignIn(email) {
-		// const actionCodeSettings = {
-		// 	// URL you want to redirect back to. The domain (www.example.com) for this
-		// 	// URL must be in the authorized domains list in the Firebase Console.
-		// 	url: "http://localhost:3000/prompt",
-		// 	// This must be true.
-		// 	handleCodeInApp: true,
-		// 	iOS: {
-		// 		bundleId: "com.example.ios",
-		// 	},
-		// 	android: {
-		// 		packageName: "com.example.android",
-		// 		installApp: true,
-		// 		minimumVersion: "12",
-		// 	},
-		// 	dynamicLinkDomain: "mementomemories.com",
-		// };
+	async function linkSignIn(email) {
+		let response = 1;
 		const actionCodeSettings = {
 			url: "http://localhost:3000/login", // Replace with the URL of your login page
 			handleCodeInApp: true,
 		};
-		sendSignInLinkToEmail(auth, email, actionCodeSettings)
+		await sendSignInLinkToEmail(auth, email, actionCodeSettings)
 			.then((e) => {
 				// The link was successfully sent. Inform the user.
 				// Save the email locally so you don't need to ask the user for it again
@@ -81,19 +66,21 @@ export function AuthProvider({ children }) {
 			.catch((error) => {
 				const errorCode = error.code;
 				const errorMessage = error.message;
+				response = -1;
+				console.log(errorCode);
+				console.log(errorMessage);
 				// ...
 			});
+		return response;
 	}
 
-	function linkSignInComplete() {
+	function linkSignInComplete(email) {
 		if (isSignInWithEmailLink(auth, window.location.href)) {
-			signInWithEmailLink(
-				auth,
-				"olsenbudanur@gmail.com",
-				window.location.href
-			).then((result) => {
-				navigate("/");
-			});
+			signInWithEmailLink(auth, email, window.location.href).then(
+				(result) => {
+					navigate("/");
+				}
+			);
 		}
 	}
 
