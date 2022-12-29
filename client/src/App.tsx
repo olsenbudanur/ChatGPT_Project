@@ -35,6 +35,7 @@ function App() {
 					/>
 					<Route path="/*" element={<Home />} />
 				</Routes>
+				<Footer></Footer>
 			</AuthProvider>
 		</Router>
 	);
