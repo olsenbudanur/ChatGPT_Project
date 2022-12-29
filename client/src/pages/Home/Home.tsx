@@ -17,6 +17,8 @@ import {
 import { auth } from "../../firebase";
 import { useAuth } from "../../components/Context/AuthContext";
 import { Alert } from "@mui/material";
+import Steps from "../../components/HomeSections/Steps";
+
 
 function Home() {
 	const [pageCount, setPageCount] = useState("2");
@@ -91,6 +93,7 @@ function Home() {
 	};
 
 	return (
+		<div>
 		<S.Wrapper>
 			<S.TextLoginWrapper>
 				<S.TextWrapper>
@@ -110,10 +113,10 @@ function Home() {
 				</S.TextWrapper>
 				<S.LoginWrapper>
 					{!currentUser && (
-						<S.LoginHeader>Create!</S.LoginHeader>
+						<S.LoginHeader>Generate your custom essay!</S.LoginHeader>
 					)}
 					{currentUser && (
-						<S.LoginHeader>Continue!</S.LoginHeader>
+						<S.LoginHeader>Generate your custom essay!</S.LoginHeader>
 					)}
 					{emailExists && (
 						<>
@@ -190,7 +193,8 @@ function Home() {
 							</S.WordCount>
 						</S.PagesWrapper>
 					)}
-					{!currentUser && (
+
+					{!currentUser &&(
 						<Button
 							fullWidth
 							sx={{
@@ -203,7 +207,7 @@ function Home() {
 							disabled={emailError}
 						>
 							Submit
-						</Button>
+						</Button> 
 					)}
 					{currentUser && (
 						<Button
@@ -222,7 +226,26 @@ function Home() {
 					)}
 				</S.LoginWrapper>
 			</S.TextLoginWrapper>
+
 		</S.Wrapper>
+		
+		<S.Sec2Wrapper>
+			<S.Title>
+				How Tutana AI works
+			</S.Title>
+			<S.TextLoginWrapper>
+				<S.stepsWrapper>
+					<S.SubTitle>
+						Steps
+					</S.SubTitle>
+					<Steps></Steps>
+				</S.stepsWrapper>
+			</S.TextLoginWrapper>
+			
+		</S.Sec2Wrapper>
+		</div>
+
+		
 	);
 }
 
