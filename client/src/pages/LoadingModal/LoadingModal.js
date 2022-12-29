@@ -19,7 +19,7 @@ const style = {
 	height: "50%",
 };
 
-export default function BasicModal() {
+export default function LoadingModal() {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
