@@ -1,7 +1,2 @@
 node_modules
 .DS_Store
-chatgpt.env
-*.env
-.env
-.env.local
-firebase.ts
