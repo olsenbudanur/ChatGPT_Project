@@ -13,16 +13,17 @@ export const Wrapper = styled.div`
 export const TextLoginWrapper = styled.div`
   display: grid;
   grid-template-columns: 300px 400px;
-  grid-gap: 100px;
-
+  grid-gap: 30vh;
+  
   margin-top: 200px;
   margin-bottom: 200px;
   padding: 10px;
 
-  @media (max-width: 700px) {
+  @media (max-width: 1000px) {
     grid-template-columns: none;
-    width: 70%;
+    width: 80%;
     grid-template-rows: 1fr 1fr;
+    grid-gap: 0px;
   }
 `;
 
@@ -64,6 +65,16 @@ export const ButtonWrapper = styled.div`
   width: 100%;
 `;
 
-export const BoiBussy = styled.h1`
+export const LoginHeader = styled.h1`
+  margin-bottom: 0px;
   color: black;
 `;
+
+
+
+export const CurrUser = styled.h4`
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  color: black;
+`

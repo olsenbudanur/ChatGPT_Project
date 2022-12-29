@@ -4,21 +4,35 @@ import TestingPage from "./pages/A4";
 import Navbar from "./components/Navbar/Navbar";
 import Prompt from "./pages/Prompt";
 import Footer from "./components/Footer/Footer";
-import { AuthProvider } from "./components/Context/AuthContext";
+import { AuthProvider, useAuth } from "./components/Context/AuthContext";
+import PrivateRoute from "./components/Routing/PrivateRoute";
+import Login from "./pages/Login";
 
 function App() {
-  return (
-    <AuthProvider>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/prompt" element={<TestingPage />} />
-          <Route path="/test" element={<Prompt />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
+	return (
+		<Router>
+			<AuthProvider>
+				<Navbar />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/prompt" element={<PrivateRoute />}>
+						<Route
+							path="/prompt"
+							element={<Prompt />}
+						/>
+					</Route>
+					<Route path="/test" element={<PrivateRoute />}>
+						<Route
+							path="/test"
+							element={<TestingPage />}
+						/>
+					</Route>
+					<Route path="/login" element={<Login />} />
+					<Route path="/*" element={<Home />} />
+				</Routes>
+			</AuthProvider>
+		</Router>
+	);
 }
 
 export default App;
