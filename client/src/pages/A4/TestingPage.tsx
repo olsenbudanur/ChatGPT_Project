@@ -60,7 +60,7 @@ function TestingPage() {
 					} else {
 						clearInterval(interval);
 					}
-				}, 20);
+				}, 6);
 			})
 			.catch((error) => {
 				console.log("error", error);
