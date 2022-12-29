@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: #1a58bc;
 
   display: grid;
@@ -10,20 +11,46 @@ export const Wrapper = styled.div`
   color: white;
 `;
 
+
+export const Sec2Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: #d7e5fc;
+  padding: 5vh;
+
+  display: flex;
+  flex-direction:column;
+  place-items: center;
+
+  color: black;
+
+  @media (max-width: 1000px) {
+    padding: 0vh;
+  }
+`;
+
+export const stepsWrapper = styled.div`
+  place-items: center;
+  padding-right: 5vh;
+  padding-left: 5vh;
+`;
+
 export const TextLoginWrapper = styled.div`
   display: grid;
-  grid-template-columns: 300px 400px;
-  grid-gap: 30vh;
+  grid-template-columns: 20vw 25vw;
+  grid-gap: 20vh;
   
-  margin-top: 200px;
-  margin-bottom: 200px;
-  padding: 10px;
+  margin-top: 5vh;
+  margin-bottom: 15vh;
+  padding: 5vh;
 
   @media (max-width: 1000px) {
     grid-template-columns: none;
     width: 80%;
     grid-template-rows: 1fr 1fr;
     grid-gap: 0px;
+    margin-top: 0vh;
+    padding: 1vh;
   }
 `;
 
@@ -37,6 +64,11 @@ export const LoginWrapper = styled.div`
   padding: 30px;
   display: grid;
   grid-gap: 20px;
+
+  @media (max-width: 1000px) {
+    padding: 15px;
+    grid-gap: 15px;
+  }
 `;
 
 export const Title = styled.h1``;
