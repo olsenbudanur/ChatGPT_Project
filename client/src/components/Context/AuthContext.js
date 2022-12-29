@@ -67,6 +67,8 @@ export function AuthProvider({ children }) {
 				const errorCode = error.code;
 				const errorMessage = error.message;
 				response = -1;
+				console.log(errorCode);
+				console.log(errorMessage);
 				// ...
 			});
 		return response;
