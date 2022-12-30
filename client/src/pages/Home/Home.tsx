@@ -19,6 +19,9 @@ import { useAuth } from "../../components/Context/AuthContext";
 import { Alert } from "@mui/material";
 import Steps from "../../components/HomeSections/Steps";
 
+const exampleEssay = require("../../assets/exampleEssay.png")
+
+
 function Home() {
 	const [pageCount, setPageCount] = useState("2");
 	const [email, setEmail] = useState("");
@@ -96,18 +99,17 @@ function Home() {
 	};
 
 	return (
-		<div>
-			<S.Wrapper>
-				<S.TextLoginWrapper>
-					<S.TextWrapper>
-						<S.Title>
-							Too Tired to Write Your College Essay?
-						</S.Title>
-						<S.SubTitle>
-							Write your essay using the same AI
-							model that powers ChatGPT in a matter
-							of minutes!
-						</S.SubTitle>
+		<S.Wrapper>
+		<S.Sec1Wrapper>
+			<S.TextLoginWrapper>
+				<S.TextWrapper>
+					<S.Title>
+						Too Tired to Write Your College Essay?
+					</S.Title>
+					<S.SubTitle>
+						Write your essay using the same AI model
+						that powers ChatGPT in a matter of minutes!
+					</S.SubTitle>
 
 						<S.Title>Try Now!</S.Title>
 						<S.SubTitle>
@@ -216,50 +218,60 @@ function Home() {
 							</S.PagesWrapper>
 						)}
 
-						{!currentUser && (
-							<Button
-								fullWidth
-								sx={{
-									marginTop: 2,
-									height: 50,
-									borderRadius: 10,
-								}}
-								variant="contained"
-								onClick={navigateToPrompt}
-							>
-								Submit
-							</Button>
-						)}
-						{currentUser && (
-							<Button
-								fullWidth
-								sx={{
-									marginTop: 2,
-									height: 50,
-									borderRadius: 10,
-								}}
-								variant="contained"
-								onClick={navigateToPrompt}
-							>
-								Continue
-							</Button>
-						)}
-					</S.LoginWrapper>
-				</S.TextLoginWrapper>
-			</S.Wrapper>
+					{!currentUser &&(
+						<Button
+							fullWidth
+							sx={{
+								marginTop: 2,
+								height: 50,
+								borderRadius: 10,
+							}}
+							variant="contained"
+							onClick={navigateToPrompt}
+						>
+							Submit
+						</Button> 
+					)}
+					{currentUser && (
+						<Button
+							fullWidth
+							sx={{
+								marginTop: 2,
+								height: 50,
+								borderRadius: 10,
+							}}
+							variant="contained"
+							onClick={navigateToPrompt}
+						>
+							Continue
+						</Button>
+					)}
+				</S.LoginWrapper>
+			</S.TextLoginWrapper>
+		</S.Sec1Wrapper>
+		
+		<S.Sec2Wrapper>
+			<S.Title>
+				How Tutana AI works
+			</S.Title>
+			<Steps/>
+		</S.Sec2Wrapper>
 
-			<S.Sec2Wrapper>
-				<S.Title>How Tutana AI works</S.Title>
-				{/* <S.TextLoginWrapper> */}
+		<S.Sec3Wrapper>
+			<S.Title>
+				Example Essays
+			</S.Title>
+			{/* <div style={{display: 'grid', gridTemplateColumns: '30vw 30vw 30vw'}}> */}
+			<S.ImageWrapper>
+				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
+				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
+				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
+			{/* </div> */}
+			</S.ImageWrapper>
+		</S.Sec3Wrapper>
+		</S.Wrapper>
 
-				<S.SubTitle>Steps</S.SubTitle>
-				<S.stepsWrapper>
-					<Steps></Steps>
-				</S.stepsWrapper>
-
-				{/* </S.TextLoginWrapper> */}
-			</S.Sec2Wrapper>
-		</div>
+		
 	);
 }
 
