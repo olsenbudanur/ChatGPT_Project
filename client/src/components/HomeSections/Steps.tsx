@@ -7,7 +7,7 @@ import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import * as S from "../../pages/Home/Home.styles";
+import * as S from "../Styles";
 
 
 const screenshot1 = require('../../assets/inputEmail1.png')
@@ -52,41 +52,48 @@ export default function Steps() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, minHeight: 400 }}>
+  <S.stepsWrapper>
+    <Box sx={{ maxWidth: 800, minHeight: 400}}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.label}>
-            <StepLabel
-            >
-              {step.label}
-            </StepLabel>
-            <StepContent>
-              <Typography>{step.description}</Typography>
-              {/* <Box sx={{ mb: 2 }}> */}
-        
-                <div>
-                  { index != steps.length - 1 ? <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Continue
-                  </Button> : null}
-                  { index != 0 ?
-                  <Button
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button> : null}
-                </div>
+                <StepLabel>
+                  {step.label}
+                </StepLabel>
+                <StepContent>
+                  <Typography>{step.description}</Typography>
+                  <Box sx={{ mb: 2 }}>
+            
+                    <div>
+                      { index != steps.length - 1 ? <Button
+                        variant="contained"
+                        onClick={handleNext}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Continue
+                      </Button> : null}
+                      { index != 0 ?
+                      <Button
+                        onClick={handleBack}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Back
+                      </Button> : null}
+                    </div>
 
-              {/* </Box> */}
-            </StepContent>
+                  </Box>
+                </StepContent>
           </Step>
         ))}
       </Stepper>
     </Box>
+  <div style={{
+    display:"grid",
+    placeItems: "center"
+  }}>
+  {<S.photo src={String(screenshots[activeStep])} />}
+  </div>
+  </S.stepsWrapper>
   
     
   );
