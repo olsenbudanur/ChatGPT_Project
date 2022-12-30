@@ -53,7 +53,7 @@ export default function Steps() {
   };
 
   return (
-  <div style={{display:'flex', flexDirection:'column'}}>
+  <S.stepsWrapper>
     <Box sx={{ maxWidth: 800, minHeight: 400}}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
@@ -89,9 +89,9 @@ export default function Steps() {
       </Stepper>
     </Box>
   <div>
-  <S.photo src={String(screenshot1)} />
+  {<S.photo src={String(screenshots[activeStep])} />}
   </div>
-  </div>
+  </S.stepsWrapper>
   
     
   );
