@@ -28,6 +28,7 @@ export default function LoadingModal() {
 		<div>
 			<Button onClick={handleOpen}>Open modal</Button>
 			<Modal
+				className={"modal"}
 				open={open}
 				onClose={handleClose}
 				aria-labelledby="modal-modal-title"
@@ -35,6 +36,7 @@ export default function LoadingModal() {
 			>
 				<Box sx={style}>
 					<body>
+						<div class="text">Loading...</div>
 						<div class="stroke"></div>
 					</body>
 				</Box>
