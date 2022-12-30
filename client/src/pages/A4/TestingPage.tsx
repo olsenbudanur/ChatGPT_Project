@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/Context/AuthContext";
 import * as S from "./TestingPage.styles";
 
-function TestingPage() {
+function TestingPage(props: any) {
 	const [ChatGPTMessage, setChatGPTMessage] = useState<string>("");
 	const [value, setValue] = useState<string>("");
 	const [value2, setValue2] = useState<string>("");
@@ -11,7 +11,9 @@ function TestingPage() {
 	const [value4, setValue4] = useState<string>("");
 	const { currentUser } = useAuth();
 	const navigate = useNavigate();
+	const location = useLocation();
 
+	console.log(location.state);
 	//
 	// If not logged in..
 	React.useEffect(() => {
