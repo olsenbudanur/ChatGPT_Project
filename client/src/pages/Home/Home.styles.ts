@@ -1,38 +1,80 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: #1a58bc;
 
+
+export const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+
+
+export const Sec1Wrapper = styled.div`
+  /* width: 100%; */
+  height: 100%;
+  background-color: #1a58bc;
   display: grid;
   place-items: center;
-
   color: white;
 `;
 
 
 export const Sec2Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: #d7e5fc;
-  padding: 5vh;
-
   display: flex;
   flex-direction:column;
   place-items: center;
-
   color: black;
-
-  @media (max-width: 1000px) {
+  @media (max-width: 900px) {
     padding: 0vh;
   }
 `;
 
+export const Sec3Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #1a58bc;
+  display: flex;
+  flex-direction:column;
+  place-items: center;
+  color: white;
+  padding-top: 2vw;
+`;
+
+export const Image = styled.img`
+  width: 300px;
+  margin-bottom: 30px;
+  /* @media (max-width:1000px) {
+    height: 10%;
+    width: 50%
+  } */
+`
+
+export const ImageWrapper = styled.div`
+  display: grid;
+  justify-items:center;
+  grid-template-columns: 20vw 20vw 20vw;
+  grid-gap: 100px;
+
+  padding: 5px;
+  @media (max-width: 1000px) {
+    grid-template-columns: none;
+    width: 80%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 0px;
+    margin-top: 0vh;
+
+  }
+`
+
 export const stepsWrapper = styled.div`
   place-items: center;
-  padding-right: 5vh;
-  padding-left: 5vh;
+  display: flex;
+  flex-direction:column;
+  /* padding-right: 5vh; */
+  /* padding-left: 5vh; */
 `;
 
 export const TextLoginWrapper = styled.div`
@@ -44,7 +86,6 @@ export const TextLoginWrapper = styled.div`
   margin-top: 5vh;
   margin-bottom: 5vh;
   padding: 5vh;
-
   @media (max-width: 1000px) {
     grid-template-columns: none;
     width: 80%;
@@ -60,12 +101,10 @@ export const TextWrapper = styled.div``;
 export const LoginWrapper = styled.div`
   background-color: white;
   border-radius: 5px;
-
   text-align: center;
   padding: 30px;
   display: grid;
   grid-gap: 20px;
-
   @media (max-width: 1000px) {
     padding: 15px;
     grid-gap: 0px;
@@ -85,10 +124,8 @@ export const PagesWrapper = styled.div`
 export const WordCount = styled.div`
   background-color: #d7d9de;
   text-align: center;
-
   border-radius: 5px;
   margin-top: 16px;
-
   display: grid;
   align-items: center;
   color: black;

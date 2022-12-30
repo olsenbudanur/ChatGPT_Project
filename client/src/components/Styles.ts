@@ -2,14 +2,7 @@ import styled from "styled-components";
 
 
 export const photo = styled.img`
-    height: 400px;
-    width: 500px;
-
-    
-    @media (max-width:1000px) {
-      height: 250px;
-      width: 300px;
-    }
+    width: 100%;
 `
 
 export const stepsWrapper = styled.div`

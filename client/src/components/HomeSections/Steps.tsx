@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import * as S from "../Styles";
 
 
-
 const screenshot1 = require('../../assets/inputEmail1.png')
 const screenshot2 = require('../../assets/pickDepth2.png')
 const screenshot3 = require('../../assets/promptInfo3.png')
@@ -88,7 +87,10 @@ export default function Steps() {
         ))}
       </Stepper>
     </Box>
-  <div>
+  <div style={{
+    display:"grid",
+    placeItems: "center"
+  }}>
   {<S.photo src={String(screenshots[activeStep])} />}
   </div>
   </S.stepsWrapper>
