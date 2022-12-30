@@ -205,7 +205,8 @@ function Navbar() {
 									onClick={navigateLogin}
 									sx={{
 										my: 2,
-										background: "blue",
+										background:
+											"#1b58bd",
 										color: "white",
 										display: "block",
 									}}
