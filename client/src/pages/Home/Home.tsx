@@ -19,7 +19,6 @@ import { useAuth } from "../../components/Context/AuthContext";
 import { Alert } from "@mui/material";
 import Steps from "../../components/HomeSections/Steps";
 
-
 function Home() {
 	const [pageCount, setPageCount] = useState("2");
 	const [email, setEmail] = useState("");
@@ -31,16 +30,6 @@ function Home() {
 	const navigate = useNavigate();
 
 	const navigateToPrompt = async () => {
-		//
-		// Validate the email using a regular expression
-		const emailRegex =
-			/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
-		if (emailRegex.test(email)) {
-			setEmailError(false);
-		} else {
-			setEmailError(true);
-			return;
-		}
 		//
 		// If logged in.
 		if (currentUser) {
@@ -56,6 +45,16 @@ function Home() {
 			// then auto log in and go to the prompt page.
 			//
 			// The password is just a filler, and is irrelevent.
+			//
+			// Validate the email using a regular expression
+			const emailRegex =
+				/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+			if (emailRegex.test(email)) {
+				setEmailError(false);
+			} else {
+				setEmailError(true);
+				return;
+			}
 
 			//
 			// If this user exists..
@@ -98,169 +97,169 @@ function Home() {
 
 	return (
 		<div>
-		<S.Wrapper>
-			<S.TextLoginWrapper>
-				<S.TextWrapper>
-					<S.Title>
-						Too Tired to Write Your College Essay?
-					</S.Title>
-					<S.SubTitle>
-						Write your essay using the same AI model
-						that powers ChatGPT in a matter of minutes!
-					</S.SubTitle>
+			<S.Wrapper>
+				<S.TextLoginWrapper>
+					<S.TextWrapper>
+						<S.Title>
+							Too Tired to Write Your College Essay?
+						</S.Title>
+						<S.SubTitle>
+							Write your essay using the same AI
+							model that powers ChatGPT in a matter
+							of minutes!
+						</S.SubTitle>
 
-					<S.Title>Try Now!</S.Title>
-					<S.SubTitle>
-						Enter some basic information, and watch the
-						AI write your essay!
-					</S.SubTitle>
-				</S.TextWrapper>
-				<S.LoginWrapper>
-					{!currentUser && (
-						<S.LoginHeader>Generate your custom essay!</S.LoginHeader>
-					)}
-					{currentUser && (
-						<S.LoginHeader>Generate your custom essay!</S.LoginHeader>
-					)}
-					{emailExists && (
-						<>
-							<Alert severity="info">
-								This email already exists.
-								Please log in through the link
-								sent to the email. (Make sure to
-								check spam)
+						<S.Title>Try Now!</S.Title>
+						<S.SubTitle>
+							Enter some basic information, and
+							watch the AI write your essay!
+						</S.SubTitle>
+					</S.TextWrapper>
+					<S.LoginWrapper>
+						{!currentUser && (
+							<S.LoginHeader>
+								Generate your custom essay!
+							</S.LoginHeader>
+						)}
+						{currentUser && (
+							<S.LoginHeader>
+								Generate your custom essay!
+							</S.LoginHeader>
+						)}
+						{emailExists && (
+							<>
+								<Alert severity="info">
+									This email already exists.
+									Please log in through the
+									link sent to the email.
+									(Make sure to check spam)
+								</Alert>
+							</>
+						)}
+						{loginError && (
+							<Alert severity="error">
+								There has been an error. Please
+								try again or contact support.
 							</Alert>
-						</>
-					)}
-					{loginError && (
-						<Alert severity="error">
-							There has been an error. Please try
-							again or contact support.
-						</Alert>
-					)}
-					{emailError && (
-						<Alert severity="error">
-							Please enter a valid email.
-						</Alert>
-					)}
-					{!currentUser && (
-						<TextField
-							label="Please Enter your Email"
-							fullWidth
-							value={email}
-							error={emailError}
-							onChange={handleEmailChange}
-							placeholder="Your Email..."
-						/>
-					)}
-					{currentUser && (
-						<S.CurrUser>
-							Currently logged in as{" "}
-							{currentUser.email}
-						</S.CurrUser>
-					)}
-					{!currentUser && (
-						<S.PagesWrapper>
-							<FormControl sx={{ marginTop: 2 }}>
-								<InputLabel>
-									Page Count
-								</InputLabel>
-								<Select
-									value={pageCount}
-									label="Page Count"
-									onChange={
-										handleCountChange
-									}
-									fullWidth
+						)}
+						{emailError && (
+							<Alert severity="error">
+								Please enter a valid email.
+							</Alert>
+						)}
+						{!currentUser && (
+							<TextField
+								label="Please Enter your Email"
+								fullWidth
+								value={email}
+								error={emailError}
+								onChange={handleEmailChange}
+								placeholder="Your Email..."
+							/>
+						)}
+						{currentUser && (
+							<S.CurrUser>
+								Currently logged in as{" "}
+								{currentUser.email}
+							</S.CurrUser>
+						)}
+						{!currentUser && (
+							<S.PagesWrapper>
+								<FormControl
+									sx={{ marginTop: 2 }}
 								>
-									<MenuItem value={1}>
-										1
-									</MenuItem>
-									<MenuItem value={2}>
-										2
-									</MenuItem>
-									<MenuItem value={3}>
-										3
-									</MenuItem>
-									<MenuItem value={4}>
-										4
-									</MenuItem>
-									<MenuItem value={5}>
-										5
-									</MenuItem>
-									<MenuItem value={6}>
-										6
-									</MenuItem>
-									<MenuItem value={7}>
-										7
-									</MenuItem>
-									<MenuItem value={8}>
-										8
-									</MenuItem>
-									<MenuItem value={9}>
-										9
-									</MenuItem>
-								</Select>
-							</FormControl>
+									<InputLabel>
+										Page Count
+									</InputLabel>
+									<Select
+										value={pageCount}
+										label="Page Count"
+										onChange={
+											handleCountChange
+										}
+										fullWidth
+									>
+										<MenuItem value={1}>
+											1
+										</MenuItem>
+										<MenuItem value={2}>
+											2
+										</MenuItem>
+										<MenuItem value={3}>
+											3
+										</MenuItem>
+										<MenuItem value={4}>
+											4
+										</MenuItem>
+										<MenuItem value={5}>
+											5
+										</MenuItem>
+										<MenuItem value={6}>
+											6
+										</MenuItem>
+										<MenuItem value={7}>
+											7
+										</MenuItem>
+										<MenuItem value={8}>
+											8
+										</MenuItem>
+										<MenuItem value={9}>
+											9
+										</MenuItem>
+									</Select>
+								</FormControl>
 
-							<S.WordCount>
-								{Number(pageCount) * 250} words
-							</S.WordCount>
-						</S.PagesWrapper>
-					)}
+								<S.WordCount>
+									{Number(pageCount) * 250}{" "}
+									words
+								</S.WordCount>
+							</S.PagesWrapper>
+						)}
 
-					{!currentUser &&(
-						<Button
-							fullWidth
-							sx={{
-								marginTop: 2,
-								height: 50,
-								borderRadius: 10,
-							}}
-							variant="contained"
-							onClick={navigateToPrompt}
-						>
-							Submit
-						</Button> 
-					)}
-					{currentUser && (
-						<Button
-							fullWidth
-							sx={{
-								marginTop: 2,
-								height: 50,
-								borderRadius: 10,
-							}}
-							variant="contained"
-							onClick={navigateToPrompt}
-						>
-							Continue
-						</Button>
-					)}
-				</S.LoginWrapper>
-			</S.TextLoginWrapper>
+						{!currentUser && (
+							<Button
+								fullWidth
+								sx={{
+									marginTop: 2,
+									height: 50,
+									borderRadius: 10,
+								}}
+								variant="contained"
+								onClick={navigateToPrompt}
+							>
+								Submit
+							</Button>
+						)}
+						{currentUser && (
+							<Button
+								fullWidth
+								sx={{
+									marginTop: 2,
+									height: 50,
+									borderRadius: 10,
+								}}
+								variant="contained"
+								onClick={navigateToPrompt}
+							>
+								Continue
+							</Button>
+						)}
+					</S.LoginWrapper>
+				</S.TextLoginWrapper>
+			</S.Wrapper>
 
-		</S.Wrapper>
-		
-		<S.Sec2Wrapper>
-			<S.Title>
-				How Tutana AI works
-			</S.Title>
-			{/* <S.TextLoginWrapper> */}
-				
-			<S.SubTitle>
-				Steps
-			</S.SubTitle>
-			<S.stepsWrapper>
-				<Steps></Steps>
-			</S.stepsWrapper>
-				
-			{/* </S.TextLoginWrapper> */}
-			
-		</S.Sec2Wrapper>
+			<S.Sec2Wrapper>
+				<S.Title>How Tutana AI works</S.Title>
+				{/* <S.TextLoginWrapper> */}
+
+				<S.SubTitle>Steps</S.SubTitle>
+				<S.stepsWrapper>
+					<Steps></Steps>
+				</S.stepsWrapper>
+
+				{/* </S.TextLoginWrapper> */}
+			</S.Sec2Wrapper>
 		</div>
-
-		
 	);
 }
 
