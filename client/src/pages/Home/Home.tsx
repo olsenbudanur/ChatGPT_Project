@@ -246,16 +246,12 @@ function Home() {
 			<S.Title>
 				How Tutana AI works
 			</S.Title>
-			{/* <S.TextLoginWrapper> */}
-				
-			<S.SubTitle>
-				Steps
-			</S.SubTitle>
+			
 			<S.stepsWrapper>
 				<Steps></Steps>
 			</S.stepsWrapper>
 				
-			{/* </S.TextLoginWrapper> */}
+			
 			
 		</S.Sec2Wrapper>
 		</div>
