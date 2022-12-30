@@ -184,6 +184,9 @@ export default function Prompt() {
 											<MenuItem value="hehe xd">
 												hehe xd
 											</MenuItem>
+											<MenuItem value="serious">
+												serious
+											</MenuItem>
 										</Select>
 									</FormControl>
 									<S.PagesWrapper>

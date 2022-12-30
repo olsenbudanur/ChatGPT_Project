@@ -7,6 +7,14 @@ import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import * as S from "../../pages/Home/Home.styles";
+
+
+const screenshot1 = require('../../assets/inputEmail1.png')
+const screenshot2 = require('../../assets/pickDepth2.png')
+const screenshot3 = require('../../assets/promptInfo3.png')
+
+const screenshots = [screenshot1, screenshot2, screenshot3]
 
 const steps = [
   {label: 'Log in with email',
@@ -54,7 +62,8 @@ export default function Steps() {
             </StepLabel>
             <StepContent>
               <Typography>{step.description}</Typography>
-              <Box sx={{ mb: 2 }}>
+              {/* <Box sx={{ mb: 2 }}> */}
+        
                 <div>
                   { index != steps.length - 1 ? <Button
                     variant="contained"
@@ -71,12 +80,15 @@ export default function Steps() {
                     Back
                   </Button> : null}
                 </div>
-              </Box>
+
+              {/* </Box> */}
             </StepContent>
           </Step>
         ))}
       </Stepper>
     </Box>
+  
+    
   );
 }
 
