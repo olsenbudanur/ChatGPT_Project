@@ -51,7 +51,7 @@ export function AuthProvider({ children }) {
 	async function linkSignIn(email) {
 		let response = 1;
 		const actionCodeSettings = {
-			url: "http://localhost:3000/login", // Replace with the URL of your login page
+			url: "http://localhost:3000/confirmlogin", // Replace with the URL of your login page
 			handleCodeInApp: true,
 		};
 		await sendSignInLinkToEmail(auth, email, actionCodeSettings)
