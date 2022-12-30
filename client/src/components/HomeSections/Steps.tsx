@@ -57,7 +57,7 @@ export default function Steps() {
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={step.label}>
-                <StepLabel>
+                <StepLabel componentsProps={{label: {style: {color: "#fff"}}}} >
                   {step.label}
                 </StepLabel>
                 <StepContent>
@@ -75,7 +75,7 @@ export default function Steps() {
                       { index != 0 ?
                       <Button
                         onClick={handleBack}
-                        sx={{ mt: 1, mr: 1 }}
+                        sx={{ mt: 1, mr: 1, color: "#fff" }}
                       >
                         Back
                       </Button> : null}
