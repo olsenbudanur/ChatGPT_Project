@@ -12,7 +12,7 @@ export const StepperWrapper = styled.div`
 export const FormWrapper = styled.div`
   margin-top: 50px;
   display: grid;
-  grid-template-rows: 50px;
+  /* grid-template-rows: 50px; */
   grid-gap: 20px;
 `;
 
