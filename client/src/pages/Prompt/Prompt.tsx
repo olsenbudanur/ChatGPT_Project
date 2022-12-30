@@ -83,7 +83,9 @@ export default function Prompt() {
   console.log(collegeName, prompt);
 
   return (
+    <S.Sec2Wrapper>
     <S.StepperWrapper>
+    
       {currentUser && (
         <Box sx={{ width: "100%" }}>
           <Stepper activeStep={activeStep}>
@@ -325,5 +327,6 @@ export default function Prompt() {
       )}
       {!currentUser}
     </S.StepperWrapper>
+    </S.Sec2Wrapper>
   );
 }

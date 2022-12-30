@@ -50,6 +50,7 @@ export const Image = styled.img`
     height: 10%;
     width: 50%
   } */
+  cursor: pointer;
 `
 
 export const ImageWrapper = styled.div`
