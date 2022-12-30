@@ -7,6 +7,14 @@ export const Paper = styled.div`
   margin: 0px auto;
   box-shadow: 0px 2px 38px rgba(0, 0, 0, 0.2);
   height: 100vh;
+  @media (max-width: 1000px) {
+    grid-template-columns: none;
+    width: 80%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 0px;
+    margin-top: 0vh;
+
+  }
 `;
 
 export const OuterLayer = styled.div`
@@ -15,6 +23,26 @@ export const OuterLayer = styled.div`
 `;
 
 export const EssayText = styled.div`
-  padding: 60px;
+  padding-bottom: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
+
+  line-height: 40px;
+  @media (max-width: 1000px) {
+    grid-template-columns: none;
+    width: 80%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 0px;
+    margin-top: 0vh;
+
+  }
+`;
+
+
+
+export const EssayTitle = styled.div`
+  text-align: center;
+  font-weight: bold;
+  padding-top: 60px;
   line-height: 40px;
 `;
