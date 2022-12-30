@@ -16,7 +16,7 @@ import { useAuth } from "../Context/AuthContext";
 import { Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["How it works", "Samples"];
+const pages = [];
 const logo = require("../../assets/croppedLogo.png");
 
 function Navbar() {
@@ -87,7 +87,7 @@ function Navbar() {
 							display: { xs: "flex", md: "none" },
 						}}
 					>
-						<IconButton
+						{/* <IconButton
 							size="large"
 							aria-label="account of current user"
 							aria-controls="menu-appbar"
@@ -96,8 +96,8 @@ function Navbar() {
 							color="inherit"
 						>
 							<MenuIcon />
-						</IconButton>
-						<Menu
+						</IconButton> */}
+						{/* <Menu
 							id="menu-appbar"
 							anchorEl={anchorElNav}
 							anchorOrigin={{
@@ -130,7 +130,7 @@ function Navbar() {
 									</Typography>
 								</MenuItem>
 							))}
-						</Menu>
+						</Menu> */}
 					</Box>
 
 					<Typography
@@ -150,6 +150,9 @@ function Navbar() {
 						}}
 					>
 						<span>&nbsp;&nbsp;</span>
+						<span>&nbsp;&nbsp;</span>
+						<span>&nbsp;&nbsp;</span>
+						<span>&nbsp;</span>
 						<Box
 							component="img"
 							sx={{
@@ -163,13 +166,14 @@ function Navbar() {
 							src={logo}
 						/>
 					</Typography>
+
 					<Box
 						sx={{
 							flexGrow: 1,
 							display: { xs: "none", md: "flex" },
 						}}
 					>
-						{pages.map((page) => (
+						{/* {pages.map((page) => (
 							<Button
 								key={page}
 								onClick={handleCloseNavMenu}
@@ -181,7 +185,7 @@ function Navbar() {
 							>
 								{page}
 							</Button>
-						))}
+						))} */}
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>
