@@ -15,8 +15,9 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth } from "../Context/AuthContext";
 import { Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+const pages = ["How it works", "Samples"];
+const logo = require("../../assets/croppedLogo.png");
 
 function Navbar() {
 	const { signUp, linkSignIn, currentUser, logOut }: any = useAuth();
@@ -51,12 +52,6 @@ function Navbar() {
 		<AppBar position="sticky">
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<AdbIcon
-						sx={{
-							display: { xs: "none", md: "flex" },
-							mr: 1,
-						}}
-					/>
 					<Typography
 						variant="h6"
 						noWrap
@@ -72,7 +67,18 @@ function Navbar() {
 							textDecoration: "none",
 						}}
 					>
-						LOGO
+						<Box
+							component="img"
+							sx={{
+								height: 70,
+								width: 70,
+								padding: 2,
+								// maxHeight: { xs: 233, md: 167 },
+								// maxWidth: { xs: 350, md: 250 },
+							}}
+							alt="Logo"
+							src={logo}
+						/>
 					</Typography>
 
 					<Box
@@ -126,17 +132,12 @@ function Navbar() {
 							))}
 						</Menu>
 					</Box>
-					<AdbIcon
-						sx={{
-							display: { xs: "flex", md: "none" },
-							mr: 1,
-						}}
-					/>
+
 					<Typography
 						variant="h5"
 						noWrap
 						component="a"
-						href=""
+						href="/"
 						sx={{
 							mr: 2,
 							display: { xs: "flex", md: "none" },
@@ -148,7 +149,19 @@ function Navbar() {
 							textDecoration: "none",
 						}}
 					>
-						LOGO
+						<span>&nbsp;&nbsp;</span>
+						<Box
+							component="img"
+							sx={{
+								height: 70,
+								width: 70,
+								padding: 2,
+								// maxHeight: { xs: 233, md: 167 },
+								// maxWidth: { xs: 350, md: 250 },
+							}}
+							alt="logo"
+							src={logo}
+						/>
 					</Typography>
 					<Box
 						sx={{
@@ -192,7 +205,8 @@ function Navbar() {
 									onClick={navigateLogin}
 									sx={{
 										my: 2,
-										background: "blue",
+										background:
+											"#1b58bd",
 										color: "white",
 										display: "block",
 									}}
