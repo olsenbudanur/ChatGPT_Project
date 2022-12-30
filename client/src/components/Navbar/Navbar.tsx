@@ -16,8 +16,7 @@ import { useAuth } from "../Context/AuthContext";
 import { Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["How it works", "Samples"];
 const logo = require("../../assets/croppedLogo.png");
 
 function Navbar() {
