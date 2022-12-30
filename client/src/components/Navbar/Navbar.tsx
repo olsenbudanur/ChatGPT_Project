@@ -76,7 +76,7 @@ function Navbar() {
 								// maxHeight: { xs: 233, md: 167 },
 								// maxWidth: { xs: 350, md: 250 },
 							}}
-							alt="The house from the offer."
+							alt="Logo"
 							src={logo}
 						/>
 					</Typography>
@@ -137,7 +137,7 @@ function Navbar() {
 						variant="h5"
 						noWrap
 						component="a"
-						href=""
+						href="/"
 						sx={{
 							mr: 2,
 							display: { xs: "flex", md: "none" },
@@ -159,7 +159,7 @@ function Navbar() {
 								// maxHeight: { xs: 233, md: 167 },
 								// maxWidth: { xs: 350, md: 250 },
 							}}
-							alt="The house from the offer."
+							alt="logo"
 							src={logo}
 						/>
 					</Typography>
