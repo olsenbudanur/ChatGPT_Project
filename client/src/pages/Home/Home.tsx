@@ -19,6 +19,8 @@ import { useAuth } from "../../components/Context/AuthContext";
 import { Alert } from "@mui/material";
 import Steps from "../../components/HomeSections/Steps";
 
+const exampleEssay = require("../../assets/exampleEssay.png")
+
 
 function Home() {
 	const [pageCount, setPageCount] = useState("2");
@@ -97,8 +99,8 @@ function Home() {
 	};
 
 	return (
-		<div>
 		<S.Wrapper>
+		<S.Sec1Wrapper>
 			<S.TextLoginWrapper>
 				<S.TextWrapper>
 					<S.Title>
@@ -239,22 +241,28 @@ function Home() {
 					)}
 				</S.LoginWrapper>
 			</S.TextLoginWrapper>
-
-		</S.Wrapper>
+		</S.Sec1Wrapper>
 		
 		<S.Sec2Wrapper>
 			<S.Title>
 				How Tutana AI works
 			</S.Title>
-			
-			<S.stepsWrapper>
-				<Steps></Steps>
-			</S.stepsWrapper>
-				
-			
-			
+			<Steps/>
 		</S.Sec2Wrapper>
-		</div>
+
+		<S.Sec3Wrapper>
+			<S.Title>
+				Example Essays
+			</S.Title>
+			{/* <div style={{display: 'grid', gridTemplateColumns: '30vw 30vw 30vw'}}> */}
+			<S.ImageWrapper>
+				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
+				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
+				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
+			{/* </div> */}
+			</S.ImageWrapper>
+		</S.Sec3Wrapper>
+		</S.Wrapper>
 
 		
 	);
