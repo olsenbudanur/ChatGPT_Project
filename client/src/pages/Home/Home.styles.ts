@@ -37,11 +37,12 @@ export const stepsWrapper = styled.div`
 
 export const TextLoginWrapper = styled.div`
   display: grid;
+  
   grid-template-columns: 20vw 25vw;
   grid-gap: 20vh;
   
   margin-top: 5vh;
-  margin-bottom: 15vh;
+  margin-bottom: 5vh;
   padding: 5vh;
 
   @media (max-width: 1000px) {
@@ -67,7 +68,7 @@ export const LoginWrapper = styled.div`
 
   @media (max-width: 1000px) {
     padding: 15px;
-    grid-gap: 15px;
+    grid-gap: 0px;
   }
 `;
 
