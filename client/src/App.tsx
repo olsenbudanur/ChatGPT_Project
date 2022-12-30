@@ -8,6 +8,7 @@ import { AuthProvider, useAuth } from "./components/Context/AuthContext";
 import PrivateRoute from "./components/Routing/PrivateRoute";
 import Login from "./pages/Login";
 import ConfirmLogin from "./pages/ConfirmLogin/ConfirmLogin";
+import Payment from "./pages/Payment";
 
 function App() {
 	return (
@@ -34,6 +35,12 @@ function App() {
 						element={<ConfirmLogin />}
 					/>
 					<Route path="/*" element={<Home />} />
+					<Route path="/prompt2" element={<PrivateRoute />}>
+						<Route
+							path="/prompt2"
+							element={<Payment />}
+						/>
+					</Route>
 				</Routes>
 				<Footer />
 			</AuthProvider>
