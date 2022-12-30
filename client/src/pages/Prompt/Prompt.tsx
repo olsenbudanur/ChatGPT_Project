@@ -87,7 +87,7 @@ export default function Prompt() {
     <S.StepperWrapper>
     
       {currentUser && (
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%"}}>
           <Stepper activeStep={activeStep}>
             {steps.map((label) => {
               const stepProps: {

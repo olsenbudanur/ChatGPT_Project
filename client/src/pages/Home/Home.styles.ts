@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import "@fontsource/nunito";
 
 
 export const Wrapper = styled.div`
@@ -7,26 +7,30 @@ export const Wrapper = styled.div`
   height: 100%;
 `;
 
-
-
 export const Sec1Wrapper = styled.div`
   /* width: 100%; */
   height: 100%;
-  background-color: #1a58bc;
+  /* background-color: #1a58bc; */
+  background-image: linear-gradient(#1a58bc, 60%, #d7e5fc 95%);
   display: grid;
   place-items: center;
   color: white;
+  font-family: Nunito;
 `;
 
 
 export const Sec2Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #d7e5fc;
+  /* background-color: #d7e5fc; */
+  background-image: linear-gradient(#d7e5fc 5%, 40%, #1a58bc 95%);
   display: flex;
   flex-direction:column;
+  padding-top: 10vh;
+  /* padding-bottom: 0vh; */
   place-items: center;
-  color: black;
+  text-shadow: 1px 1px 2px black;
+  color: white;
   @media (max-width: 900px) {
     padding: 0vh;
   }
@@ -35,12 +39,14 @@ export const Sec2Wrapper = styled.div`
 export const Sec3Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #1a58bc;
+  /* background-color: #1a58bc; */
+  background-image: linear-gradient(#1a58bc 5%, 70%, #d7e5fc);
   display: flex;
   flex-direction:column;
   place-items: center;
   color: white;
-  padding-top: 2vw;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 `;
 
 export const Image = styled.img`
@@ -51,6 +57,10 @@ export const Image = styled.img`
     width: 50%
   } */
   cursor: pointer;
+`
+
+export const openAILogo = styled.img`
+  width: 50px;
 `
 
 export const ImageWrapper = styled.div`
@@ -81,11 +91,11 @@ export const stepsWrapper = styled.div`
 export const TextLoginWrapper = styled.div`
   display: grid;
   
-  grid-template-columns: 20vw 25vw;
+  grid-template-columns: 40vw 25vw;
   grid-gap: 20vh;
   
   margin-top: 5vh;
-  margin-bottom: 5vh;
+  margin-bottom: 10vh;
   padding: 5vh;
   @media (max-width: 1000px) {
     grid-template-columns: none;
@@ -93,11 +103,14 @@ export const TextLoginWrapper = styled.div`
     grid-template-rows: 1fr 1fr;
     grid-gap: 0px;
     margin-top: 0vh;
+    margin-bottom: 0vh;
     padding: 1vh;
   }
 `;
 
-export const TextWrapper = styled.div``;
+export const TextWrapper = styled.div`
+  text-shadow: 1px 1px 2px black;
+`;
 
 export const LoginWrapper = styled.div`
   background-color: white;
@@ -107,14 +120,25 @@ export const LoginWrapper = styled.div`
   display: grid;
   grid-gap: 20px;
   @media (max-width: 1000px) {
-    padding: 15px;
+    padding-top: 15px;
     grid-gap: 0px;
+    height: 70%;
   }
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+  font-size: 50px;
+  @media (max-width: 1000px) {
+    font-size: 37px;
+  }
+`;
 
-export const SubTitle = styled.h5``;
+export const SubTitle = styled.h2`
+
+  @media (max-width: 1000px) {
+      font-size: 18px;
+    }
+`;
 
 export const PagesWrapper = styled.div`
   display: grid;
@@ -140,8 +164,6 @@ export const LoginHeader = styled.h1`
   margin-bottom: 0px;
   color: black;
 `;
-
-
 
 export const CurrUser = styled.h4`
   border: 0px;
