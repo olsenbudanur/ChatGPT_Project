@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import "@fontsource/nunito";
 
-
 export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -18,14 +17,13 @@ export const Sec1Wrapper = styled.div`
   font-family: Nunito;
 `;
 
-
 export const Sec2Wrapper = styled.div`
   width: 100%;
   height: 100%;
   /* background-color: #d7e5fc; */
   background-image: linear-gradient(#d7e5fc 5%, 40%, #1a58bc 95%);
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   padding-top: 10vh;
   /* padding-bottom: 0vh; */
   place-items: center;
@@ -42,7 +40,7 @@ export const Sec3Wrapper = styled.div`
   /* background-color: #1a58bc; */
   background-image: linear-gradient(#1a58bc 5%, 70%, #d7e5fc);
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   place-items: center;
   color: white;
   padding-top: 5vh;
@@ -57,15 +55,15 @@ export const Image = styled.img`
     width: 50%
   } */
   cursor: pointer;
-`
+`;
 
 export const openAILogo = styled.img`
   width: 50px;
-`
+`;
 
 export const ImageWrapper = styled.div`
   display: grid;
-  justify-items:center;
+  justify-items: center;
   grid-template-columns: 20vw 20vw 20vw;
   grid-gap: 100px;
 
@@ -76,24 +74,23 @@ export const ImageWrapper = styled.div`
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 0px;
     margin-top: 0vh;
-
   }
-`
+`;
 
 export const stepsWrapper = styled.div`
   place-items: center;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   /* padding-right: 5vh; */
   /* padding-left: 5vh; */
 `;
 
 export const TextLoginWrapper = styled.div`
   display: grid;
-  
+
   grid-template-columns: 40vw 25vw;
   grid-gap: 20vh;
-  
+
   margin-top: 5vh;
   margin-bottom: 10vh;
   padding: 5vh;
@@ -134,10 +131,9 @@ export const Title = styled.h1`
 `;
 
 export const SubTitle = styled.h2`
-
   @media (max-width: 1000px) {
-      font-size: 18px;
-    }
+    font-size: 18px;
+  }
 `;
 
 export const PagesWrapper = styled.div`
@@ -171,4 +167,4 @@ export const CurrUser = styled.h4`
   margin: 0px;
   padding: 0px;
   color: black;
-`
+`;
