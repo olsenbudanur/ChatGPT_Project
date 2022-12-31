@@ -122,7 +122,7 @@ export const LoginWrapper = styled.div`
   @media (max-width: 1000px) {
     padding-top: 15px;
     grid-gap: 0px;
-    height: 70%;
+    height: 80%;
   }
 `;
 
@@ -143,6 +143,7 @@ export const SubTitle = styled.h2`
 export const PagesWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  height: 50px;
   grid-gap: 5px;
 `;
 
