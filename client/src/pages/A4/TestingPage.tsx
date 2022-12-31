@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/Context/AuthContext";
+import Button from "@mui/material/Button";
+
 import * as S from "./TestingPage.styles";
 
-function TestingPage(props: any) {
-  const [ChatGPTMessage, setChatGPTMessage] = useState<string>("");
-  const [value, setValue] = useState<string>("");
-  const [value2, setValue2] = useState<string>("");
-  const [value3, setValue3] = useState<string>("");
-  const [value4, setValue4] = useState<string>("");
+function TestingPage() {
+  const [ChatGPTMessage, setChatGPTMessage] = useState("");
+  const [value, setValue] = useState("");
+  const [essay, setEssay] = useState("");
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.state);
+  // console.log(location.state);
   //
   // If not logged in..
   React.useEffect(() => {
@@ -21,18 +21,6 @@ function TestingPage(props: any) {
       navigate("/");
     }
   }, []);
-
-  async function paperHelper(idx: any, val: any) {
-    if (idx == 1) {
-      setValue((value) => (value += val));
-    } else if (idx == 2) {
-      setValue2((value2) => (value2 += val));
-    } else if (idx == 3) {
-      setValue3((value3) => (value3 += val));
-    } else if (idx == 4) {
-      setValue4((value4) => (value4 += val));
-    }
-  }
 
   async function submit() {
     //
@@ -64,27 +52,19 @@ function TestingPage(props: any) {
       .then((response) => response.json())
       .then((data) => {
         setValue("");
+
+        setEssay(data.body);
         index = -1;
-        let curr = 1;
-        let interval = setInterval(() => {
+
+        setInterval(() => {
           if (index < data.body.length) {
-            paperHelper(curr, data.body.charAt(index));
-            if (index != 0 && curr == 1 && index % 1000 == 0) {
-              curr++;
-            } else if (index != 0 && (index + 200) % 1100 == 0) {
-              curr++;
-            }
-            // if (index != 0 && index % 1200 == 0) {
-            // 	curr++;
+            // if (data.body.charAt(index).charCodeAt(0) === 10) {
+            //   document.getElementById("test").innerHTML;
+            //   index++;
+            //   return;
             // }
-            // setValue(
-            // 	(value) =>
-            // 		(value +=
-            // 			data.body.charAt(index))
-            // );
+            setValue((value) => (value += data.body.charAt(index)));
             index++;
-          } else {
-            clearInterval(interval);
           }
         }, 6);
       })
@@ -102,22 +82,29 @@ function TestingPage(props: any) {
         onChange={(e) => setChatGPTMessage(e.target.value)}
       />
       <button onClick={submit}>Send the data</button>
+
+      <Button
+        style={{ marginTop: "10px" }}
+        onClick={() => {
+          navigator.clipboard.writeText(essay);
+        }}
+        variant="contained"
+      >
+        Copy to clipboard
+      </Button>
+
       <br></br>
       <S.Paper>
         <S.EssayTitle>College Essay</S.EssayTitle>
-        <S.EssayText>{value}</S.EssayText>
-      </S.Paper>
-      <br></br>
-      <S.Paper>
-        <S.EssayText>{value2}</S.EssayText>
-      </S.Paper>
-      <br></br>
-      <S.Paper>
-        <S.EssayText>{value3}</S.EssayText>
-      </S.Paper>
-      <br></br>
-      <S.Paper>
-        <S.EssayText>{value4}</S.EssayText>
+        <S.EssayText>
+          {value.split("").map((c) => {
+            if (c.charCodeAt(0) === 10) {
+              return <br />;
+            } else {
+              return c;
+            }
+          })}
+        </S.EssayText>
       </S.Paper>
     </S.OuterLayer>
   );
