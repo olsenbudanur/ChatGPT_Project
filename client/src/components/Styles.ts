@@ -11,8 +11,8 @@ export const stepsWrapper = styled.div`
   grid-template-columns: 20vw 25vw;
   grid-gap: 20vh;
   
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  /* margin-top: 5vh; */
+  /* margin-bottom: 5vh; */
   padding: 5vh;
 
   @media (max-width: 1000px) {
