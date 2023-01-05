@@ -87,7 +87,7 @@ app.post("/college-essay", async (req: Request, res: Response) => {
     const childhood = promptMain.childhood;
     const anything = promptMain.anything;
 
-    const constructedPrompt = '';
+    const constructedPrompt = `Write a college essay to ${collegeName} using the prompt ${prompt}.. Yada yada yada`;
 
     const payload: string = await consultOpenAI(constructedPrompt);
     
