@@ -106,20 +106,19 @@ export default function Prompt() {
 		setPrompt((event.target as HTMLInputElement).value);
 	};
 
-  return (
-    <S.Sec2Wrapper>
-    <S.StepperWrapper>
-    
-      {currentUser && (
-        <Box sx={{ width: "100%"}}>
-          <Stepper activeStep={activeStep}>
-            {steps.map((label) => {
-              const stepProps: {
-                completed?: boolean;
-              } = {};
-              const labelProps: {
-                optional?: React.ReactNode;
-              } = {};
+	return (
+		<S.Sec2Wrapper>
+			<S.StepperWrapper>
+				{currentUser && (
+					<Box sx={{ width: "100%" }}>
+						<Stepper activeStep={activeStep}>
+							{steps.map((label) => {
+								const stepProps: {
+									completed?: boolean;
+								} = {};
+								const labelProps: {
+									optional?: React.ReactNode;
+								} = {};
 
 								return (
 									<Step
@@ -225,18 +224,20 @@ export default function Prompt() {
 													);
 												}}
 											>
-												<MenuItem value="yarrak">
-													yarrak
+												<MenuItem value="Cheerful">
+													Cheerful
 												</MenuItem>
-												<MenuItem value="bussi">
-													bussi
+												<MenuItem value="Reflective">
+													Reflective
 												</MenuItem>
-												<MenuItem value="hehe xd">
-													hehe
-													xd
+												<MenuItem value="Humorous">
+													Humorous
 												</MenuItem>
-												<MenuItem value="serious">
-													serious
+												<MenuItem value="Melancholy">
+													Melancholy
+												</MenuItem>
+												<MenuItem value="Melancholy">
+													Lighthearted
 												</MenuItem>
 											</Select>
 										</FormControl>
