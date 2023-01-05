@@ -125,7 +125,6 @@ function EssayPage() {
 						<h1>Loading</h1>
 						<CircularProgress></CircularProgress>
 					</S.LoadingWrapper>
-					{/* {value} */}
 					{value.split("").map((c) => {
 						if (c.charCodeAt(0) === 10) {
 							return <br />;
