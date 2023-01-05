@@ -63,6 +63,7 @@ function TestingPage() {
 				setValue("");
 
 				setEssay(data.body);
+
 				setCopy(false);
 				index = -1;
 
