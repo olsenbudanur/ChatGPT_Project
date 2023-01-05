@@ -10,11 +10,12 @@ import Typography from '@mui/material/Typography';
 import * as S from "../Styles";
 
 
-const screenshot1 = require('../../assets/inputEmail1.png')
-const screenshot2 = require('../../assets/pickDepth2.png')
-const screenshot3 = require('../../assets/promptInfo3.png')
+const screenshot1 = require('../../assets/screenshot1.png')
+const screenshot2 = require('../../assets/screenshot2.png')
+const screenshot3 = require('../../assets/screenshot3.png')
+const screenshot4 = require('../../assets/screenshot4.jpeg')
 
-const screenshots = [screenshot1, screenshot2, screenshot3]
+const screenshots = [screenshot1, screenshot2, screenshot3, screenshot4]
 
 const steps = [
   {label: 'Log in with email',
