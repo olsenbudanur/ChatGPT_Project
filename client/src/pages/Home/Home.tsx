@@ -44,7 +44,7 @@ function Home() {
 		//
 		// If logged in.
 		if (currentUser) {
-			navigate("/prompt");
+			navigate("/prompts");
 		} else {
 			//
 			// Check if the email has an account already,
@@ -88,7 +88,7 @@ function Home() {
 					.then((userCredential: any) => {
 						// Signed in
 						const user = userCredential.user;
-						navigate("/prompt");
+						navigate("/prompts");
 					})
 					.catch((error: any) => {
 						const errorCode = error.code;

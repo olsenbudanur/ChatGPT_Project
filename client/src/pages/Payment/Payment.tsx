@@ -30,7 +30,7 @@ export default function Payment() {
 	const location = useLocation();
 
 	const toEssay = () => {
-		navigate("/test", { state: location.state });
+		navigate("/essay-page", { state: location.state });
 	};
 
 	useEffect(() => {

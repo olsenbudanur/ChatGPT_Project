@@ -16,13 +16,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import MuiAlert from "@mui/material/Alert";
 import { redirect } from "react-router-dom";
-import * as S from "./Prompt.styles";
+import * as S from "./Prompts.styles";
 import { useAuth } from "../../components/Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const steps = ["Pick Depth", "Give Prompt Information", "AI Writes Essay"];
 
-export default function Prompt() {
+export default function Prompts() {
 	const [activeStep, setActiveStep] = React.useState(0);
 	const [collegeName, setCollegeName] = React.useState("");
 	const [prompt, setPrompt] = React.useState("");
@@ -44,7 +44,7 @@ export default function Prompt() {
 	const navigate = useNavigate();
 
 	const toPayment = () => {
-		navigate("/prompt2", {
+		navigate("/payment", {
 			state: {
 				collegeName: collegeName,
 				prompt: prompt,
