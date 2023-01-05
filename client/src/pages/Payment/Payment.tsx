@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import * as S from "./Payment.styles";
-import { Alert } from "@mui/material";
+import { Alert, CircularProgress } from "@mui/material";
 import {
 	createUserWithEmailAndPassword,
 	fetchSignInMethodsForEmail,
@@ -21,6 +21,7 @@ import {
 import { auth } from "../../firebase";
 import { useAuth } from "../../components/Context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const exampleEssay = require("../../assets/blurEssay.png");
 
@@ -29,13 +30,22 @@ export default function Payment() {
 	const location = useLocation();
 
 	const toEssay = () => {
-		navigate("/test", { state: location.state });
+		navigate("/essay-page", { state: location.state });
 	};
+
+	useEffect(() => {
+		toEssay();
+	}, []);
 
 	return (
 		<>
 			<S.Sec2Wrapper>
-				Your essay is ready!
+				<S.LoadingWrapper>
+					<h1>Loading</h1>
+					<CircularProgress></CircularProgress>
+				</S.LoadingWrapper>
+
+				{/* Your essay is ready!
 				<br></br>
 				<br></br>
 				<S.Image src={String(exampleEssay)} />
@@ -53,7 +63,7 @@ export default function Payment() {
 					color="inherit"
 				>
 					Get or Buy (Depends idk)!
-				</Button>
+				</Button> */}
 			</S.Sec2Wrapper>
 		</>
 	);

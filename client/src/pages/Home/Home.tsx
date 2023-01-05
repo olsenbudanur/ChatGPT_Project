@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import BasicModal from "../LoadingModal/LoadingModal";
 import TextField from "@mui/material/TextField";
 import { Navbar } from "react-bootstrap";
 import Footer from "../../components/Footer/Footer";
@@ -9,7 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import * as S from "./Home.styles";
-import { TypeAnimation } from 'react-type-animation';
+import { TypeAnimation } from "react-type-animation";
 import { useNavigate } from "react-router-dom";
 import {
 	createUserWithEmailAndPassword,
@@ -20,9 +19,10 @@ import { useAuth } from "../../components/Context/AuthContext";
 import { Alert } from "@mui/material";
 import Steps from "../../components/HomeSections/Steps";
 
-const exampleEssay = require("../../assets/exampleEssay.png");
+const exampleEssay1 = require("../../assets/Essay1.png");
+const exampleEssay2 = require("../../assets/Essay2.png");
+const exampleEssay3 = require("../../assets/Essay3.png");
 const openAI = require("../../assets/openai.png");
-
 
 function Home() {
 	const [pageCount, setPageCount] = useState("2");
@@ -44,7 +44,7 @@ function Home() {
 		//
 		// If logged in.
 		if (currentUser) {
-			navigate("/prompt");
+			navigate("/prompts");
 		} else {
 			//
 			// Check if the email has an account already,
@@ -88,7 +88,7 @@ function Home() {
 					.then((userCredential: any) => {
 						// Signed in
 						const user = userCredential.user;
-						navigate("/prompt");
+						navigate("/prompts");
 					})
 					.catch((error: any) => {
 						const errorCode = error.code;
@@ -106,21 +106,27 @@ function Home() {
 		setEmail(event.target.value);
 	};
 
-
-
 	return (
 		<S.Wrapper>
-		<S.Sec1Wrapper>
-			<S.TextLoginWrapper>
-				<S.TextWrapper>
-					<S.Title>
-						<TypeAnimation sequence={['Too Tired to Write Your College Essay?']} speed={80}/>
-					</S.Title>
-					<S.SubTitle>
-						Write your essay using the same AI model
-						that powers ChatGPT <S.openAILogo src={String(openAI)} /> in a matter of minutes{(blink)?'!':''}
-					</S.SubTitle>
-					
+			<S.Sec1Wrapper>
+				<S.TextLoginWrapper>
+					<S.TextWrapper>
+						<S.Title>
+							<TypeAnimation
+								sequence={[
+									"Too Tired to Write Your College Essay?",
+								]}
+								speed={80}
+							/>
+						</S.Title>
+						<S.SubTitle>
+							Write your essay using the same AI
+							model that powers ChatGPT{" "}
+							<S.openAILogo src={String(openAI)} />{" "}
+							in a matter of minutes
+							{blink ? "!" : ""}
+						</S.SubTitle>
+
 						<S.Title>Try Now!</S.Title>
 						<S.SubTitle>
 							Enter some basic information, and
@@ -228,60 +234,75 @@ function Home() {
 							</S.PagesWrapper>
 						)}
 
-					{!currentUser &&(
-						<Button
-							fullWidth
-							sx={{
-								marginTop: 2,
-								height: 50,
-								borderRadius: 10,
-							}}
-							variant="contained"
-							onClick={navigateToPrompt}
-						>
-							Submit
-						</Button> 
-					)}
-					{currentUser && (
-						<Button
-							fullWidth
-							sx={{
-								marginTop: 2,
-								height: 50,
-								borderRadius: 10,
-							}}
-							variant="contained"
-							onClick={navigateToPrompt}
-						>
-							Continue
-						</Button>
-					)}
-				</S.LoginWrapper>
-			</S.TextLoginWrapper>
-		</S.Sec1Wrapper>
-		
-		<S.Sec2Wrapper>
-			<S.Title>
-				How Tutana AI works
-			</S.Title>
-			<Steps/>
-		</S.Sec2Wrapper>
+						{!currentUser && (
+							<Button
+								fullWidth
+								sx={{
+									marginTop: 2,
+									height: 50,
+									borderRadius: 10,
+								}}
+								variant="contained"
+								onClick={navigateToPrompt}
+							>
+								Submit
+							</Button>
+						)}
+						{currentUser && (
+							<Button
+								fullWidth
+								sx={{
+									marginTop: 2,
+									height: 50,
+									borderRadius: 10,
+								}}
+								variant="contained"
+								onClick={navigateToPrompt}
+							>
+								Continue
+							</Button>
+						)}
+					</S.LoginWrapper>
+				</S.TextLoginWrapper>
+			</S.Sec1Wrapper>
 
-		<S.Sec3Wrapper>
-			<S.Title>
-				Example Essays
-			</S.Title>
-			{/* <div style={{display: 'grid', gridTemplateColumns: '30vw 30vw 30vw'}}> */}
-			<S.ImageWrapper>
-				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
-				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
-				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
-			{/* </div> */}
-			</S.ImageWrapper>
-		</S.Sec3Wrapper>
+			<S.Sec2Wrapper>
+				<S.Title>How Tutana AI works</S.Title>
+				<Steps />
+			</S.Sec2Wrapper>
+
+			<S.Sec3Wrapper>
+				<S.Title>Example Essays</S.Title>
+				{/* <div style={{display: 'grid', gridTemplateColumns: '30vw 30vw 30vw'}}> */}
+				<S.ImageWrapper>
+					<S.Image
+						src={String(exampleEssay1)}
+						onClick={() =>
+							window.open(
+								"https://docs.google.com/document/d/1gqyfuwOG1ekPxijoJMdVa2npY1_boKt5JQbSQsv5WtM/edit?usp=sharing"
+							)
+						}
+					/>
+					<S.Image
+						src={String(exampleEssay2)}
+						onClick={() =>
+							window.open(
+								"https://docs.google.com/document/d/1NA6VlQeZXrSJW6sk4ti4oWSV5CRAUbzofPGfDEdRJxg/edit?usp=sharing"
+							)
+						}
+					/>
+					<S.Image
+						src={String(exampleEssay3)}
+						onClick={() =>
+							window.open(
+								"https://docs.google.com/document/d/1YntnpgukUJRkS4J-QJYdnAVJrcpVeZdbBH8LNylXaPI/edit?usp=sharing"
+							)
+						}
+					/>
+					{/* </div> */}
+				</S.ImageWrapper>
+			</S.Sec3Wrapper>
 		</S.Wrapper>
-
-		
 	);
 }
 

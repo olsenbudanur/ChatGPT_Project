@@ -12,7 +12,8 @@ export const Image = styled.img`
 
 
 export const Sec2Wrapper = styled.div`
-  height: 100vh;
+  /* height: 100vh; */
+  height: 80vh;
   background-color: #d7e5fc;
   display: flex;
   flex-direction:column;
@@ -21,4 +22,14 @@ export const Sec2Wrapper = styled.div`
   @media (max-width: 900px) {
     padding: 0vh;
   }
+  
+`;
+
+
+export const LoadingWrapper = styled.div`
+    display: flex;
+    flex-direction:column;
+    place-items: center;
+    margin: auto;
+    margin-top: 30vh;
 `;
