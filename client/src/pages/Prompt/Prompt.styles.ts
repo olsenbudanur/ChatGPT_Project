@@ -35,8 +35,9 @@ export const WordCount = styled.div`
 `;
 
 export const Sec2Wrapper = styled.div`
-  height: 100vh;
-  background-color: #d7e5fc;
+  height: 100%;
+  padding-bottom: 10vh;
+  background-color: #ffff;
   display: flex;
   flex-direction:column;
   place-items: center;
