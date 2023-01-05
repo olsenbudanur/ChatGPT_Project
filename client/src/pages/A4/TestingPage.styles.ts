@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IB {
+  disp: string,
+}
+
 export const Paper = styled.div`
   position: relative;
   background: #fff;
@@ -41,4 +45,30 @@ export const EssayTitle = styled.div`
   font-weight: bold;
   padding-top: 60px;
   line-height: 40px;
+`;
+
+
+export const LoadingWrapper = styled.div<IB>`
+    display: ${props => props.disp};
+    flex-direction:column;
+    place-items: center;
+    margin: auto;
+`;
+
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  /* flex-direction:column; */
+  place-items: center;
+  color: black;
+  /* align-items: center; */
+  justify-content: center;
+  gap: 10px;
+`
+
+
+
+
+export const CopyWrapper = styled.div<IB>`
+    display: ${props => props.disp};
 `;

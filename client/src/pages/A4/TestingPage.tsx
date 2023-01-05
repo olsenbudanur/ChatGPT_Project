@@ -4,110 +4,134 @@ import { useAuth } from "../../components/Context/AuthContext";
 import Button from "@mui/material/Button";
 
 import * as S from "./TestingPage.styles";
+import { CircularProgress } from "@mui/material";
 
 function TestingPage() {
-  const [ChatGPTMessage, setChatGPTMessage] = useState("");
-  const [value, setValue] = useState("");
-  const [essay, setEssay] = useState("");
-  const { currentUser } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
+	const [ChatGPTMessage, setChatGPTMessage] = useState("");
+	const [value, setValue] = useState("");
+	const [essay, setEssay] = useState("");
+	const [loading, setLoading] = useState("none");
+	const [copy, setCopy] = useState(true);
+	const { currentUser } = useAuth();
+	const navigate = useNavigate();
+	const location = useLocation();
 
-  // console.log(location.state);
-  //
-  // If not logged in..
-  React.useEffect(() => {
-    if (!currentUser) {
-      navigate("/");
-    }
-  }, []);
+	// console.log(location.state);
+	//
+	// If not logged in..
+	React.useEffect(() => {
+		if (!currentUser) {
+			navigate("/");
+		}
+	}, []);
 
-  async function submit() {
-    //
-    // Kill all other runs that might be happening.
-    var highestTimeoutId = setTimeout(";");
-    for (var i = 0; i < highestTimeoutId; i++) {
-      clearTimeout(i);
-    }
+	async function submit() {
+		//
+		// Kill all other runs that might be happening.
+		var highestTimeoutId = setTimeout(";");
+		for (var i = 0; i < highestTimeoutId; i++) {
+			clearTimeout(i);
+		}
 
-    setValue("Response is loading.");
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Accept", "application/json");
-    myHeaders.append("Origin", "http://localhost:3000");
+		setLoading("flex");
 
-    var raw = JSON.stringify({
-      prompt: ChatGPTMessage,
-    });
+		setValue("Response is loading.");
 
-    var requestOptions: RequestInit = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-      mode: "cors",
-    };
-    let index = 0;
-    fetch("http://localhost:8080/college-essay", requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        setValue("");
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+		myHeaders.append("Accept", "application/json");
+		myHeaders.append("Origin", "http://localhost:3000");
 
-        setEssay(data.body);
-        index = -1;
+		// var raw = JSON.stringify({
+		// 	prompt: ChatGPTMessage,
+		// });
 
-        setInterval(() => {
-          if (index < data.body.length) {
-            // if (data.body.charAt(index).charCodeAt(0) === 10) {
-            //   document.getElementById("test").innerHTML;
-            //   index++;
-            //   return;
-            // }
-            setValue((value) => (value += data.body.charAt(index)));
-            index++;
-          }
-        }, 6);
-      })
-      .catch((error) => {
-        console.log("error", error);
-        setValue("ERROR: " + error.toString());
-      });
-  }
+		var raw = JSON.stringify(location.state);
 
-  return (
-    <S.OuterLayer className="TestingPage">
-      <input
-        type="textarea"
-        name="textValue"
-        onChange={(e) => setChatGPTMessage(e.target.value)}
-      />
-      <button onClick={submit}>Send the data</button>
+		var requestOptions: RequestInit = {
+			method: "POST",
+			headers: myHeaders,
+			body: raw,
+			redirect: "follow",
+			mode: "cors",
+		};
+		let index = 0;
+		fetch("http://localhost:8080/college-essay", requestOptions)
+			.then((response) => response.json())
+			.then((data) => {
+				setLoading("none");
+				setValue("");
 
-      <Button
-        style={{ marginTop: "10px" }}
-        onClick={() => {
-          navigator.clipboard.writeText(essay);
-        }}
-        variant="contained"
-      >
-        Copy to clipboard
-      </Button>
+				setEssay(data.body);
+				setCopy(false);
 
-      <br></br>
-      <S.Paper>
-        <S.EssayTitle>College Essay</S.EssayTitle>
-        <S.EssayText>
-          {value.split("").map((c) => {
-            if (c.charCodeAt(0) === 10) {
-              return <br />;
-            } else {
-              return c;
-            }
-          })}
-        </S.EssayText>
-      </S.Paper>
-    </S.OuterLayer>
-  );
+				index = -1;
+
+				setInterval(() => {
+					if (index < data.body.length) {
+						// if (data.body.charAt(index).charCodeAt(0) === 10) {
+						//   document.getElementById("test").innerHTML;
+						//   index++;
+						//   return;
+						// }
+						setValue(
+							(value) =>
+								(value +=
+									data.body.charAt(index))
+						);
+						index++;
+					}
+				}, 6);
+			})
+			.catch((error) => {
+				console.log("error", error);
+				setValue("ERROR: " + error.toString());
+			});
+	}
+
+	return (
+		<S.OuterLayer className="TestingPage">
+			<S.ButtonsWrapper>
+				<Button
+					style={{ marginTop: "10px" }}
+					variant="contained"
+					onClick={submit}
+				>
+					Start Writing!
+				</Button>
+
+				<Button
+					disabled={copy}
+					color="info"
+					style={{ marginTop: "10px" }}
+					onClick={() => {
+						navigator.clipboard.writeText(essay);
+					}}
+					variant="contained"
+				>
+					Copy to clipboard
+				</Button>
+			</S.ButtonsWrapper>
+
+			<br></br>
+			<S.Paper>
+				<S.EssayTitle>College Essay</S.EssayTitle>
+				<S.EssayText>
+					<S.LoadingWrapper disp={loading}>
+						<h1>Loading</h1>
+						<CircularProgress></CircularProgress>
+					</S.LoadingWrapper>
+					{value.split("").map((c) => {
+						if (c.charCodeAt(0) === 10) {
+							return <br />;
+						} else {
+							return c;
+						}
+					})}
+				</S.EssayText>
+			</S.Paper>
+		</S.OuterLayer>
+	);
 }
 
 export default TestingPage;
