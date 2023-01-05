@@ -11,6 +11,7 @@ function TestingPage() {
 	const [value, setValue] = useState("");
 	const [essay, setEssay] = useState("");
 	const [loading, setLoading] = useState("none");
+	const [copy, setCopy] = useState(true);
 	const { currentUser } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -62,6 +63,7 @@ function TestingPage() {
 				setValue("");
 
 				setEssay(data.body);
+				setCopy(false);
 				index = -1;
 
 				setInterval(() => {
@@ -88,22 +90,27 @@ function TestingPage() {
 
 	return (
 		<S.OuterLayer className="TestingPage">
-			<input
-				type="textarea"
-				name="textValue"
-				onChange={(e) => setChatGPTMessage(e.target.value)}
-			/>
-			<button onClick={submit}>Send the data</button>
+			<S.ButtonsWrapper>
+				<Button
+					style={{ marginTop: "10px" }}
+					variant="contained"
+					onClick={submit}
+				>
+					Start Writing!
+				</Button>
 
-			<Button
-				style={{ marginTop: "10px" }}
-				onClick={() => {
-					navigator.clipboard.writeText(essay);
-				}}
-				variant="contained"
-			>
-				Copy to clipboard
-			</Button>
+				<Button
+					disabled={copy}
+					color="info"
+					style={{ marginTop: "10px" }}
+					onClick={() => {
+						navigator.clipboard.writeText(essay);
+					}}
+					variant="contained"
+				>
+					Copy to clipboard
+				</Button>
+			</S.ButtonsWrapper>
 
 			<br></br>
 			<S.Paper>
