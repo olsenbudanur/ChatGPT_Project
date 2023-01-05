@@ -70,8 +70,28 @@ Hitler’s actions were abhorrent and inexcusable. He caused immense suffering a
 // The post request for writing a college essay.
 app.post("/college-essay", async (req: Request, res: Response) => {
   try {
-    const prompt: string = req.body["prompt"];
-    const payload: string = await consultOpenAI(prompt);
+    const promptMain = req.body;
+
+    const collegeName = promptMain.collegeName;
+    const prompt = promptMain.prompt;
+    const promptTopic = promptMain.promptTopic;
+    const mood = promptMain.mood;
+    const pageCount = promptMain.pageCount;
+    const writtenEssay = promptMain.writtenEssay;
+    const hobby = promptMain.hobby;
+    const hobbyTime = promptMain.hobbyTime;
+    const hobbyFav = promptMain.hobbyFav;
+    const hobbyLearned = promptMain.hobbyLearned;
+    const hobbyLeadership = promptMain.hobbyLeadership;
+    const event = promptMain.event;
+    const childhood = promptMain.childhood;
+    const anything = promptMain.anything;
+
+    const constructedPrompt = '';
+
+    const payload: string = await consultOpenAI(constructedPrompt);
+    
+    
     res.status(200).send({
       body: payload,
     });

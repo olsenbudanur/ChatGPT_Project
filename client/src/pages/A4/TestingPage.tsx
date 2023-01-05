@@ -41,9 +41,11 @@ function TestingPage() {
 		myHeaders.append("Accept", "application/json");
 		myHeaders.append("Origin", "http://localhost:3000");
 
-		var raw = JSON.stringify({
-			prompt: ChatGPTMessage,
-		});
+		// var raw = JSON.stringify({
+		// 	prompt: ChatGPTMessage,
+		// });
+
+		var raw = JSON.stringify(location.state);
 
 		var requestOptions: RequestInit = {
 			method: "POST",
