@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import TestingPage from "./pages/A4";
+import TestingPage from "./pages/EssayPage";
 import Navbar from "./components/Navbar/Navbar";
-import Prompt from "./pages/Prompt";
 import Footer from "./components/Footer/Footer";
 import { AuthProvider, useAuth } from "./components/Context/AuthContext";
 import PrivateRoute from "./components/Routing/PrivateRoute";
 import Login from "./pages/Login";
 import ConfirmLogin from "./pages/ConfirmLogin/ConfirmLogin";
 import Payment from "./pages/Payment";
+import Prompts from "./pages/Prompts";
 
 function App() {
 	return (
@@ -17,27 +17,30 @@ function App() {
 				<Navbar />
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/prompt" element={<PrivateRoute />}>
+					<Route path="/prompts" element={<PrivateRoute />}>
 						<Route
-							path="/prompt"
-							element={<Prompt />}
+							path="/prompts"
+							element={<Prompts />}
 						/>
 					</Route>
-					<Route path="/test" element={<PrivateRoute />}>
+					<Route
+						path="/essay-page"
+						element={<PrivateRoute />}
+					>
 						<Route
-							path="/test"
+							path="/essay-page"
 							element={<TestingPage />}
 						/>
 					</Route>
 					<Route path="/login" element={<Login />} />
 					<Route
-						path="/confirmlogin"
+						path="/confirm-login"
 						element={<ConfirmLogin />}
 					/>
 					<Route path="/*" element={<Home />} />
-					<Route path="/prompt2" element={<PrivateRoute />}>
+					<Route path="/payment" element={<PrivateRoute />}>
 						<Route
-							path="/prompt2"
+							path="/payment"
 							element={<Payment />}
 						/>
 					</Route>

@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/Context/AuthContext";
 import Button from "@mui/material/Button";
 
-import * as S from "./TestingPage.styles";
+import * as S from "./EssayPage.styles";
 import { CircularProgress } from "@mui/material";
 
-function TestingPage() {
+function EssayPage() {
 	const [ChatGPTMessage, setChatGPTMessage] = useState("");
 	const [value, setValue] = useState("");
 	const [essay, setEssay] = useState("");
@@ -67,19 +67,23 @@ function TestingPage() {
 
 				index = -1;
 
-				setInterval(() => {
+				let interval = setInterval(() => {
 					if (index < data.body.length) {
 						// if (data.body.charAt(index).charCodeAt(0) === 10) {
 						//   document.getElementById("test").innerHTML;
 						//   index++;
 						//   return;
 						// }
+
 						setValue(
 							(value) =>
 								(value +=
 									data.body.charAt(index))
 						);
 						index++;
+					} else {
+						console.log({ value });
+						clearInterval(interval);
 					}
 				}, 6);
 			})
@@ -121,6 +125,7 @@ function TestingPage() {
 						<h1>Loading</h1>
 						<CircularProgress></CircularProgress>
 					</S.LoadingWrapper>
+					{/* {value} */}
 					{value.split("").map((c) => {
 						if (c.charCodeAt(0) === 10) {
 							return <br />;
@@ -134,4 +139,4 @@ function TestingPage() {
 	);
 }
 
-export default TestingPage;
+export default EssayPage;

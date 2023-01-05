@@ -87,7 +87,7 @@ export default function Login() {
 					// Signed in
 					const user = userCredential.user;
 					console.log(user);
-					navigate("/prompt");
+					navigate("/prompts");
 				})
 				.catch((error: any) => {
 					const errorCode = error.code;
@@ -99,7 +99,7 @@ export default function Login() {
 
 	return (
 		// <ThemeProvider theme={theme}>
-	<S.Sec2Wrapper>
+		<S.Sec2Wrapper>
 			<Container component="main" maxWidth="xs">
 				<CssBaseline />
 				<br></br>
@@ -178,7 +178,7 @@ export default function Login() {
 					</Box>
 				</Box>
 			</Container>
-		{/* </ThemeProvider> */}
+			{/* </ThemeProvider> */}
 		</S.Sec2Wrapper>
 	);
 }
