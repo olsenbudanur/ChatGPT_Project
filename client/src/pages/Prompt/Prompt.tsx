@@ -106,19 +106,20 @@ export default function Prompt() {
 		setPrompt((event.target as HTMLInputElement).value);
 	};
 
-	return (
-		<S.Sec2Wrapper>
-			<S.StepperWrapper>
-				{currentUser && (
-					<Box sx={{ width: "100%" }}>
-						<Stepper activeStep={activeStep}>
-							{steps.map((label) => {
-								const stepProps: {
-									completed?: boolean;
-								} = {};
-								const labelProps: {
-									optional?: React.ReactNode;
-								} = {};
+  return (
+    <S.Sec2Wrapper>
+    <S.StepperWrapper>
+    
+      {currentUser && (
+        <Box sx={{ width: "100%"}}>
+          <Stepper activeStep={activeStep}>
+            {steps.map((label) => {
+              const stepProps: {
+                completed?: boolean;
+              } = {};
+              const labelProps: {
+                optional?: React.ReactNode;
+              } = {};
 
 								return (
 									<Step

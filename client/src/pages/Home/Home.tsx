@@ -9,6 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import * as S from "./Home.styles";
+import { TypeAnimation } from 'react-type-animation';
 import { useNavigate } from "react-router-dom";
 import {
 	createUserWithEmailAndPassword,
@@ -19,7 +20,8 @@ import { useAuth } from "../../components/Context/AuthContext";
 import { Alert } from "@mui/material";
 import Steps from "../../components/HomeSections/Steps";
 
-const exampleEssay = require("../../assets/exampleEssay.png")
+const exampleEssay = require("../../assets/exampleEssay.png");
+const openAI = require("../../assets/openai.png");
 
 
 function Home() {
@@ -29,6 +31,12 @@ function Home() {
 	const [emailExists, setEmailExists] = useState<boolean>(false);
 	const { signUp, linkSignIn, currentUser }: any = useAuth();
 	const [loginError, setLoginError] = React.useState<boolean>(false);
+	const [blink, setBlink] = useState(true);
+	// const interval = setInterval(() => setTime(Date.now()), 1000);
+
+	// while(true){
+	// 	setBlink(!blink);
+	// };
 
 	const navigate = useNavigate();
 
@@ -98,19 +106,21 @@ function Home() {
 		setEmail(event.target.value);
 	};
 
+
+
 	return (
 		<S.Wrapper>
 		<S.Sec1Wrapper>
 			<S.TextLoginWrapper>
 				<S.TextWrapper>
 					<S.Title>
-						Too Tired to Write Your College Essay?
+						<TypeAnimation sequence={['Too Tired to Write Your College Essay?']} speed={80}/>
 					</S.Title>
 					<S.SubTitle>
 						Write your essay using the same AI model
-						that powers ChatGPT in a matter of minutes!
+						that powers ChatGPT <S.openAILogo src={String(openAI)} /> in a matter of minutes{(blink)?'!':''}
 					</S.SubTitle>
-
+					
 						<S.Title>Try Now!</S.Title>
 						<S.SubTitle>
 							Enter some basic information, and
