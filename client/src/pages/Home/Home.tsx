@@ -20,7 +20,9 @@ import { useAuth } from "../../components/Context/AuthContext";
 import { Alert } from "@mui/material";
 import Steps from "../../components/HomeSections/Steps";
 
-const exampleEssay = require("../../assets/exampleEssay.png");
+const exampleEssay1 = require("../../assets/Essay1.png");
+const exampleEssay2 = require("../../assets/Essay2.png");
+const exampleEssay3 = require("../../assets/Essay3.png");
 const openAI = require("../../assets/openai.png");
 
 
@@ -273,9 +275,9 @@ function Home() {
 			</S.Title>
 			{/* <div style={{display: 'grid', gridTemplateColumns: '30vw 30vw 30vw'}}> */}
 			<S.ImageWrapper>
-				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
-				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
-				<S.Image src={String(exampleEssay)} onClick={() => window.open('https://docs.google.com/document/d/1LjMZWjhzGVFZcj5lEF6JtHFGcFcAkMKyAdn7Cp3QteA/edit?usp=sharing')}/>
+				<S.Image src={String(exampleEssay1)} onClick={() => window.open('https://docs.google.com/document/d/1gqyfuwOG1ekPxijoJMdVa2npY1_boKt5JQbSQsv5WtM/edit?usp=sharing')}/>
+				<S.Image src={String(exampleEssay2)} onClick={() => window.open('https://docs.google.com/document/d/1NA6VlQeZXrSJW6sk4ti4oWSV5CRAUbzofPGfDEdRJxg/edit?usp=sharing')}/>
+				<S.Image src={String(exampleEssay3)} onClick={() => window.open('https://docs.google.com/document/d/1YntnpgukUJRkS4J-QJYdnAVJrcpVeZdbBH8LNylXaPI/edit?usp=sharing')}/>
 			{/* </div> */}
 			</S.ImageWrapper>
 		</S.Sec3Wrapper>
