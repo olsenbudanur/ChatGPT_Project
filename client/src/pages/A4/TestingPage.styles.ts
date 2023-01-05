@@ -54,3 +54,21 @@ export const LoadingWrapper = styled.div<IB>`
     place-items: center;
     margin: auto;
 `;
+
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  /* flex-direction:column; */
+  place-items: center;
+  color: black;
+  /* align-items: center; */
+  justify-content: center;
+  gap: 10px;
+`
+
+
+
+
+export const CopyWrapper = styled.div<IB>`
+    display: ${props => props.disp};
+`;
