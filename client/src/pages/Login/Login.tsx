@@ -40,7 +40,7 @@ export default function Login() {
 	};
 
 	const handleEmailSubmit = (email: any) => {
-		setEmail(email);
+		setEmail(email.toLowerCase());
 		//
 		// Validate the email using a regular expression
 		const emailRegex =
