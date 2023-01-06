@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/Context/AuthContext";
 import Button from "@mui/material/Button";
@@ -6,136 +6,130 @@ import Button from "@mui/material/Button";
 import * as S from "./EssayPage.styles";
 import { CircularProgress } from "@mui/material";
 
+function typingEffect(str: string, setState: (s: string) => void) {
+  let i = 0;
+
+  function next() {
+    try {
+      setState(str.substring(0, i));
+      i++;
+      if (i <= str.length) {
+        setTimeout(next, 7);
+      }
+    } catch (error) {
+      setState("Rate limiting has occured, try in an hour :)");
+    }
+  }
+
+  setTimeout(next, 7);
+}
+
 function EssayPage() {
-	const [ChatGPTMessage, setChatGPTMessage] = useState("");
-	const [value, setValue] = useState("");
-	const [essay, setEssay] = useState("");
-	const [loading, setLoading] = useState("none");
-	const [copy, setCopy] = useState(true);
-	const { currentUser } = useAuth();
-	const navigate = useNavigate();
-	const location = useLocation();
+  const [value, setValue] = useState("");
+  const [essay, setEssay] = useState("");
+  const [loading, setLoading] = useState("none");
+  const [copy, setCopy] = useState(true);
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-	// console.log(location.state);
-	//
-	// If not logged in..
-	React.useEffect(() => {
-		if (!currentUser) {
-			navigate("/");
-		}
-	}, []);
+  // console.log(location.state);
+  //
+  // If not logged in..
+  React.useEffect(() => {
+    if (!currentUser) {
+      navigate("/");
+    }
 
-	async function submit() {
-		//
-		// Kill all other runs that might be happening.
-		var highestTimeoutId = setTimeout(";");
-		for (var i = 0; i < highestTimeoutId; i++) {
-			clearTimeout(i);
-		}
+    submit();
+  }, []);
 
-		setLoading("flex");
+  async function submit() {
+    //
+    // Kill all other runs that might be happening.
+    const highestTimeoutId = setTimeout(";");
+    for (var i = 0; i < highestTimeoutId; i++) {
+      clearTimeout(i);
+    }
 
-		setValue("Response is loading.");
+    setLoading("flex");
 
-		var myHeaders = new Headers();
-		myHeaders.append("Content-Type", "application/json");
-		myHeaders.append("Accept", "application/json");
-		myHeaders.append("Origin", "http://localhost:3000");
+    setValue("Response is loading.");
 
-		// var raw = JSON.stringify({
-		// 	prompt: ChatGPTMessage,
-		// });
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Origin", "http://localhost:3000");
 
-		var raw = JSON.stringify(location.state);
+    const raw = JSON.stringify({ ...location.state, email: currentUser.email });
 
-		var requestOptions: RequestInit = {
-			method: "POST",
-			headers: myHeaders,
-			body: raw,
-			redirect: "follow",
-			mode: "cors",
-		};
-		let index = 0;
-		fetch("http://localhost:8080/college-essay", requestOptions)
-			.then((response) => response.json())
-			.then((data) => {
-				setLoading("none");
-				setValue("");
+    const requestOptions: RequestInit = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+      mode: "cors",
+    };
 
-				setEssay(data.body);
-				setCopy(false);
+    fetch("http://localhost:8080/college-essay", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setLoading("none");
+        setValue("");
 
-				index = -1;
+        setEssay(data.body);
+        setCopy(false);
 
-				let interval = setInterval(() => {
-					if (index < data.body.length) {
-						// if (data.body.charAt(index).charCodeAt(0) === 10) {
-						//   document.getElementById("test").innerHTML;
-						//   index++;
-						//   return;
-						// }
+        typingEffect(data.body, setValue);
+      })
+      .catch(() => {
+        setValue("Rate limiting has occured, try in an hour :)");
+      });
+  }
 
-						setValue(
-							(value) =>
-								(value +=
-									data.body.charAt(index))
-						);
-						index++;
-					} else {
-						console.log({ value });
-						clearInterval(interval);
-					}
-				}, 6);
-			})
-			.catch((error) => {
-				console.log("error", error);
-				setValue("ERROR: " + error.toString());
-			});
-	}
+  return (
+    <S.OuterLayer className="TestingPage">
+      <S.ButtonsWrapper>
+        {/* <Button
+          style={{ marginTop: "10px" }}
+          variant="contained"
+          onClick={submit}
+        >
+          Start Writing!
+        </Button> */}
 
-	return (
-		<S.OuterLayer className="TestingPage">
-			<S.ButtonsWrapper>
-				<Button
-					style={{ marginTop: "10px" }}
-					variant="contained"
-					onClick={submit}
-				>
-					Start Writing!
-				</Button>
+        <Button
+          disabled={copy}
+          color="info"
+          style={{ marginTop: "10px" }}
+          onClick={() => {
+            navigator.clipboard.writeText(essay);
+          }}
+          variant="contained"
+        >
+          Copy to clipboard
+        </Button>
+      </S.ButtonsWrapper>
 
-				<Button
-					disabled={copy}
-					color="info"
-					style={{ marginTop: "10px" }}
-					onClick={() => {
-						navigator.clipboard.writeText(essay);
-					}}
-					variant="contained"
-				>
-					Copy to clipboard
-				</Button>
-			</S.ButtonsWrapper>
-
-			<br></br>
-			<S.Paper>
-				<S.EssayTitle>College Essay</S.EssayTitle>
-				<S.EssayText>
-					<S.LoadingWrapper disp={loading}>
-						<h1>Loading</h1>
-						<CircularProgress></CircularProgress>
-					</S.LoadingWrapper>
-					{value.split("").map((c) => {
-						if (c.charCodeAt(0) === 10) {
-							return <br />;
-						} else {
-							return c;
-						}
-					})}
-				</S.EssayText>
-			</S.Paper>
-		</S.OuterLayer>
-	);
+      <br></br>
+      <S.Paper>
+        <S.EssayTitle>College Essay</S.EssayTitle>
+        <S.EssayText>
+          <S.LoadingWrapper disp={loading}>
+            <h1>Loading</h1>
+            <CircularProgress></CircularProgress>
+          </S.LoadingWrapper>
+          {value.split("").map((c) => {
+            if (c.charCodeAt(0) === 10) {
+              return <br />;
+            } else {
+              return c;
+            }
+          })}
+        </S.EssayText>
+      </S.Paper>
+    </S.OuterLayer>
+  );
 }
 
 export default EssayPage;
