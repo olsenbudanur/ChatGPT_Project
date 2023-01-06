@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { Configuration, OpenAIApi } from "openai";
+import rateLimiter from "./utils";
 import dotenv from "dotenv";
 
 //
@@ -53,14 +54,12 @@ async function consultOpenAI(prompt: string): Promise<string> {
 
   // let text = "As a world champion kickboxer, I am used to pushing myself to the limit, always striving to reach my goals and make the most of my opportunities. This same tenacity and drive has enabled me to become a successful competitive fighter and, now, I am ready to challenge myself academically. I am confident that I can bring this same level of commitment and passion to Hustlers University. The martial arts have taught me many valuable lessons, including how to stay focused on the task at hand, how to manage my time and energy, and most importantly, how to remain humble and resilient in the face of adversity. These are all qualities that will serve me well as a student at Hustlers University. I am eager to learn from the faculty and students, to contribute my own unique perspective, and to be part of a vibrant and diverse community. My achievements in the world of kickboxing have also shown me the importance of hard work and dedication. I understand that success is a result of preparation and perseverance. I am prepared to take on the challenges of academia and have no doubt that I will be successful in achieving my goals. I am incredibly excited to take my next step in life and apply to Hustlers University. I am confident thatAs a world champion kickboxer, I am used to pushing myself to the limit, always striving to reach my goals and make the most of my opportunities. This same tenacity and drive has enabled me to become a successful competitive fighter and, now, I am ready to challenge myself academically. I am confident that I can bring this same level of commitment and passion to Hustlers University. The martial arts have taught me many valuable lessons, including how to stay focused on the task at hand, how to manage my time and energy, and most importantly, how to remain humble and resilient in the face of adversity. These are all qualities that will serve me well as a student at Hustlers University. I am eager to learn from the faculty and students, to contribute my own unique perspective, and to be part of a vibrant and diverse community. My achievements in the world of kickboxing have also shown me the importance of hard work and dedication. I understand that success is a result of preparation and perseverance. I am prepared to take on the challenges of academia and have no doubt that I will be successful in achieving my goals. I am incredibly excited to take my next step in life and apply to Hustlers University. I am confident thatAs a world champion kickboxer, I am used to pushing myself to the limit, always striving to reach my goals and make the most of my opportunities. This same tenacity and drive has enabled me to become a successful competitive fighter and, now, I am ready to challenge myself academically. I am confident that I can bring this same level of commitment and passion to Hustlers University. The martial arts have taught me many valuable lessons, including how to stay focused on the task at hand, how to manage my time and energy, and most importantly, how to remain humble and resilient in the face of adversity. These are all qualities that will serve me well as a student at Hustlers University. I am eager to learn from the faculty and students, to contribute my own unique perspective, and to be part of a vibrant and diverse community. My achievements in the world of kickboxing have also shown me the importance of hard work and dedication. I understand that success is a result of preparation and perseverance. I am prepared to take on the challenges of academia and have no doubt that I will be successful in achieving my goals. I am incredibly excited to take my next step in life and apply to Hustlers University. I am confident that"
 
-
   let text = `When I was twelve years old, I experienced a tragedy that changed my life forever. My beloved cat, Daisy, passed away suddenly, and I was left feeling helpless and heartbroken. I was determined to make something positive out of this loss, and so I decided to use my entrepreneurial skills to start a business that would make it easier for people to travel with their pets.
   
   My business, which helps Airbnb hosts become more pet-friendly, has allowed me to use my knowledge in business and technology to make a difference in the world. I have developed a website that provides hosts with valuable information about pet-friendly rules and regulations in different cities, and I have also connected with local animal shelters to provide hosts with resources and advice on how to safely accommodate pets in their homes.
   
   More than anything, my business has been a reminder to me that I can still make a positive impact in the world, even in the face of tragedy. My entrepreneurial spirit has driven me to excel in my studies, and I have been able to use my business acumen to help others. I have also been able to use my business as a platform to raise awareness about pet adoption, and I have been able to connect with pets through it.
 `;
-
 
   return text;
 }
@@ -69,6 +68,10 @@ async function consultOpenAI(prompt: string): Promise<string> {
 // The post request for writing a college essay.
 app.post("/college-essay", async (req: Request, res: Response) => {
   try {
+    const email = req.body.email;
+
+    rateLimiter(email);
+
     const promptMain = req.body;
 
     const collegeName = promptMain.collegeName;
@@ -89,14 +92,12 @@ app.post("/college-essay", async (req: Request, res: Response) => {
     const constructedPrompt = `Write a college essay to ${collegeName} using the prompt ${prompt}.. Yada yada yada`;
 
     const payload: string = await consultOpenAI(constructedPrompt);
-    
-    
+
     res.status(200).send({
       body: payload,
     });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ error });
+  } catch (error: any) {
+    res.status(400).send("Rate Limiting");
   }
 });
 
