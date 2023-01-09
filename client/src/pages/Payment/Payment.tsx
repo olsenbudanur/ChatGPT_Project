@@ -21,16 +21,24 @@ import {
 import { auth } from "../../firebase";
 import { useAuth } from "../../components/Context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import SummaryPage from "./SummaryPage";
+import Cookies from "js-cookie";
 
 const exampleEssay = require("../../assets/blurEssay.png");
 
 export default function Payment() {
 	const navigate = useNavigate();
 	const location = useLocation();
-
+	const [loading, setLoading] = useState(true);
+	const [purchase, setPurchase] = useState(false);
 	const toEssay = () => {
-		navigate("/essay-page", { state: location.state });
+		Cookies.set("state", JSON.stringify(location.state), {
+			expires: 7,
+		});
+		setTimeout(() => {
+			setLoading(false);
+		}, 10000); //
 	};
 
 	useEffect(() => {
@@ -39,32 +47,57 @@ export default function Payment() {
 
 	return (
 		<>
-			<S.Sec2Wrapper>
-				<S.LoadingWrapper>
-					<h1>Loading</h1>
-					<CircularProgress></CircularProgress>
-				</S.LoadingWrapper>
+			<div
+				style={{
+					display: loading ? "none" : "block",
+				}}
+			>
+				<S.Sec2Wrapper>
+					<div
+						style={{
+							display: purchase ? "none" : "block",
+						}}
+					>
+						<S.Sec2Wrapper>
+							<h1>Your essay is ready!</h1>
+							<br></br>
+							<S.Image src={String(exampleEssay)} />
 
-				{/* Your essay is ready!
-				<br></br>
-				<br></br>
-				<S.Image src={String(exampleEssay)} />
-				Limited Time sale!!!
-				<Button
-					onClick={() => {
-						toEssay();
-					}}
-					sx={{
-						my: 2,
-						background: "#1b58bd",
-						color: "white",
-						display: "block",
-					}}
-					color="inherit"
-				>
-					Get or Buy (Depends idk)!
-				</Button> */}
-			</S.Sec2Wrapper>
+							<Button
+								onClick={() => {
+									setPurchase(true);
+								}}
+								sx={{
+									my: 2,
+									background: "#1b58bd",
+									color: "white",
+									display: "block",
+								}}
+								color="inherit"
+							>
+								Get the Essay!
+							</Button>
+						</S.Sec2Wrapper>
+					</div>
+
+					<div
+						style={{
+							display: purchase ? "block" : "none",
+						}}
+					>
+						<SummaryPage></SummaryPage>
+					</div>
+				</S.Sec2Wrapper>
+			</div>
+			<div style={{ display: loading ? "block" : "none" }}>
+				<S.Sec2Wrapper>
+					<S.LoadingWrapper>
+						<h1>Essay is being written</h1>
+						<br></br>
+						<CircularProgress></CircularProgress>
+					</S.LoadingWrapper>
+				</S.Sec2Wrapper>
+			</div>
 		</>
 	);
 }
