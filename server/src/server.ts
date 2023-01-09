@@ -25,7 +25,7 @@ app.use(cors(corsOptions));
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 const storeItems = new Map([[
-  1, {priceInCents : 500, name: "Essay"}
+  1, {priceInCents : 10000, name: "Essay"}
 ]])
 
 
@@ -35,7 +35,7 @@ app.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: req.body.items.map((item : any) => {
-        const storeItem = {priceInCents : 500, name: "Essay"};
+        const storeItem = {priceInCents : 10000, name: "Essay"};
         return {
           price_data: {
             currency: 'usd',
