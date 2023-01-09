@@ -38,7 +38,7 @@ export default function Payment() {
 		});
 		setTimeout(() => {
 			setLoading(false);
-		}, 10000); //
+		}, 10000);
 	};
 
 	useEffect(() => {
