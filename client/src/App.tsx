@@ -24,11 +24,11 @@ function App() {
 						/>
 					</Route>
 					<Route
-						path="/essay-page"
+						path="/949ff4f6-8fb1-11ed-a1eb-0242ac120002"
 						element={<PrivateRoute />}
 					>
 						<Route
-							path="/essay-page"
+							path="/949ff4f6-8fb1-11ed-a1eb-0242ac120002"
 							element={<TestingPage />}
 						/>
 					</Route>

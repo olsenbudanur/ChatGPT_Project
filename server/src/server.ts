@@ -4,6 +4,8 @@ import cors from "cors";
 import { Configuration, OpenAIApi } from "openai";
 import rateLimiter from "./utils";
 import dotenv from "dotenv";
+import { request } from "http";
+dotenv.config({ path: ".env" });
 
 //
 // Set up express
@@ -17,8 +19,46 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+
+//
+// Set up stripe
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
+
+const storeItems = new Map([[
+  1, {priceInCents : 500, name: "Essay"}
+]])
+
+
+app.post('/create-checkout-session', async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      mode: 'payment',
+      line_items: req.body.items.map((item : any) => {
+        const storeItem = {priceInCents : 500, name: "Essay"};
+        return {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: storeItem.name
+            },
+            unit_amount: storeItem.priceInCents
+          },
+          quantity: item.quantity  
+        }
+      }),
+      success_url: "http://localhost:3000/949ff4f6-8fb1-11ed-a1eb-0242ac120002",
+      cancel_url: "http://localhost:3000/payment"
+    })
+    res.json({url : session.url})
+  }
+  catch (e : any) {
+    res.status(500).json({error : e.message})
+  }
+  
+})
+
 // Get the env variables/API Keys and set up OpenAI API
-// dotenv.config({ path: ".env" });
 // let APIKEY = process.env.KEY;
 // let ORGANIZATION = process.env.ORG;
 // const configuration = new Configuration({
