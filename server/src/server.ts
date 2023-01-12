@@ -5,6 +5,8 @@ import { Configuration, OpenAIApi } from "openai";
 import rateLimiter from "./utils";
 import dotenv from "dotenv";
 import { request } from "http";
+import path from "path";
+
 dotenv.config({ path: ".env" });
 
 let apiOrNot = true;
@@ -197,6 +199,14 @@ app.get("/hayat", async (req: Request, res: Response) => {
     res.status(400).send(`it is ${apiOrNot}`);
   }
 });
+
+
+app.use(express.static(path.resolve(__dirname, "../../client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve("../../client/build/index.html"));
+});
+
 
 //
 // Start listening
