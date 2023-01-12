@@ -119,7 +119,7 @@ export const LoginWrapper = styled.div`
   @media (max-width: 1000px) {
     padding-top: 15px;
     grid-gap: 0px;
-    height: 80%;
+    height: 100%;
   }
 `;
 
@@ -154,6 +154,7 @@ export const WordCount = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
+  margin-top: 10px;
   width: 100%;
 `;
 
