@@ -53,8 +53,6 @@ function EssayPage() {
 
 		setLoading("flex");
 
-		setValue("Response is loading.");
-
 		const myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
 		myHeaders.append("Accept", "application/json");

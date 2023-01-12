@@ -92,7 +92,7 @@ export default function SummaryPage() {
                   </td> */}
                   <td className="align-middle">
                     <p className="mb-0" style={{ fontWeight: "500" }}>
-                      $9.99
+                      $4.99
                     </p>
                   </td>
                 </tr>
@@ -114,7 +114,7 @@ export default function SummaryPage() {
                     style={{ fontWeight: "500" }}
                   >
                     <p className="mb-2">Subtotal</p>
-                    <p className="mb-2">$9.99</p>
+                    <p className="mb-2">$4.99</p>
                   </div>
 
                   
@@ -125,13 +125,13 @@ export default function SummaryPage() {
                     style={{ fontWeight: "500" }}
                   >
                     <p className="mb-2">Total (tax included)</p>
-                    <p className="mb-2">$9.99</p>
+                    <p className="mb-2">$4.99</p>
                   </div>
 
                   <MDBBtn onClick={pay} block size="lg">
                     <div className="d-flex justify-content-between">
                       <span>Checkout</span>
-                      <span>$9.99</span>
+                      <span>$4.99</span>
                     </div>
                   </MDBBtn>
                 </MDBCol>

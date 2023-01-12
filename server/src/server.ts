@@ -23,7 +23,7 @@ app.use(cors(corsOptions));
 // Set up stripe
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
-const storeItems = new Map([[1, { priceInCents: 999, name: "Essay" }]]);
+const storeItems = new Map([[1, { priceInCents: 499, name: "Essay" }]]);
 
 app.post("/create-checkout-session", async (req, res) => {
   try {
@@ -31,7 +31,7 @@ app.post("/create-checkout-session", async (req, res) => {
       payment_method_types: ["card"],
       mode: "payment",
       line_items: req.body.items.map((item: any) => {
-        const storeItem = { priceInCents: 999, name: "Essay" };
+        const storeItem = { priceInCents: 499, name: "Essay" };
         return {
           price_data: {
             currency: "usd",
@@ -156,26 +156,24 @@ app.post("/college-essay", async (req: Request, res: Response) => {
     if (promptTopic === "") {
       promptTopic = "This essay is a personal statement";
     } else {
-      promptTopic = "The prompt that my essay should answer: " + promptTopic;
+      promptTopic = "The prompt that my essay should answer: '" + promptTopic + "'";
     }
 
-    const constructedPrompt = `I am writing a college essay application to ${collegeName}. 
-    I want this essay to a ${mood} mood. The essay should be ${
-      Number(pageCount) * 250
-    } words. "${promptTopic}".
-    I am ${threewords} as a student. I am interested in majoring in ${major}.
-    The reason I want to go to ${collegeName} is ${reasonCollege}.
-    What I want to achieve in ${collegeName} is ${collegePurpose}
-    My hobbies include: ${hobby}. My biggest obstacles were: ${obstacles}. I admire ${whoInspire}.
-    I am captivated by: ${captivation}. The problems I solved were : ${problemsSolved}.
-    I should be admitted into ${collegeName}. Write this essay for me. `.;
-
-    console.log(constructedPrompt);
+    //
+    // The first essay section written.
+    const constructedPrompt = `I am writing a college essay application to ${collegeName}. I want this essay to a ${mood} mood. ${promptTopic}. I am ${threewords} as a student. I am interested in majoring in ${major}. The reason I want to go to ${collegeName} is ${reasonCollege}. What I want to achieve in ${collegeName} is ${collegePurpose} My hobbies include: ${hobby}. My biggest obstacles were: ${obstacles}. I admire ${whoInspire}. I am captivated by: ${captivation}. The problems I solved were : ${problemsSolved}. Write the initial section of this essay in ${Number(pageCount) * 150} words. This section should not have a conclusion or a summary since it's the first half.`;
 
     const payload: string = await consultOpenAI(constructedPrompt);
 
+    //
+    // Complete the essay.
+    let constructedPrompt3 = `Write the conclusion to this essay in ${Number(pageCount) * 150} wirds. Make sure not to be repetetive: "${payload}"`;
+    const payload3: string = await consultOpenAI(constructedPrompt3);
+
+    const finalPayload = payload + payload3;
+
     res.status(200).send({
-      body: payload,
+      body: finalPayload,
     });
   } catch (error: any) {
     console.log(error);
