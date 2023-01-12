@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import { request } from "http";
 dotenv.config({ path: ".env" });
 
-//
+let apiOrNot = true;
 // Set up express
 const app = express();
 const PORT = 8080;
@@ -19,59 +19,90 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-
 //
 // Set up stripe
-const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
-const storeItems = new Map([[
-  1, {priceInCents : 10000, name: "Essay"}
-]])
+const storeItems = new Map([[1, { priceInCents: 999, name: "Essay" }]]);
 
-
-app.post('/create-checkout-session', async (req, res) => {
+app.post("/create-checkout-session", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      mode: 'payment',
-      line_items: req.body.items.map((item : any) => {
-        const storeItem = {priceInCents : 10000, name: "Essay"};
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items: req.body.items.map((item: any) => {
+        const storeItem = { priceInCents: 999, name: "Essay" };
         return {
           price_data: {
-            currency: 'usd',
+            currency: "usd",
             product_data: {
-              name: storeItem.name
+              name: storeItem.name,
             },
-            unit_amount: storeItem.priceInCents
+            unit_amount: storeItem.priceInCents,
           },
-          quantity: item.quantity  
-        }
+          quantity: item.quantity,
+        };
       }),
       success_url: "http://localhost:3000/949ff4f6-8fb1-11ed-a1eb-0242ac120002",
-      cancel_url: "http://localhost:3000/payment"
-    })
-    res.json({url : session.url})
+      cancel_url: "http://localhost:3000/prompt",
+    });
+    res.json({ url: session.url });
+  } catch (e: any) {
+    res.status(500).json({ error: e.message });
   }
-  catch (e : any) {
-    res.status(500).json({error : e.message})
-  }
-  
-})
+});
 
 // Get the env variables/API Keys and set up OpenAI API
-// let APIKEY = process.env.KEY;
-// let ORGANIZATION = process.env.ORG;
-// const configuration = new Configuration({
-//   organization: ORGANIZATION,
-//   apiKey: APIKEY,
-// });
-// dotenv.config({ path: "../.env" });
-// const openai = new OpenAIApi(configuration);
+let APIKEY = process.env.KEY;
+let ORGANIZATION = process.env.ORG;
+const configuration = new Configuration({
+  organization: ORGANIZATION,
+  apiKey: APIKEY,
+});
+dotenv.config({ path: "../.env" });
+const openai = new OpenAIApi(configuration);
 
 //
 // Function to make the request to OpenAI
 // @param prompt the prompt for the model
 async function consultOpenAI(prompt: string): Promise<string> {
+  let text;
+
+  console.log(apiOrNot);
+
+  if (apiOrNot) {
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: prompt,
+      temperature: 0.7,
+      max_tokens: 3000,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
+    text =
+      response.data.choices[0].text !== undefined
+        ? response.data.choices[0].text
+        : "Error!";
+  } else {
+    text = `I have always been a curious and open-minded person. I am never afraid to challenge and question the beliefs and ideas that I come across in life. One particular time that I questioned and challenged a belief or idea was when I decided to explore my own gender identity.
+
+    Growing up, I was assigned the female gender at birth. I was raised in a traditional family and was taught that gender was something that was predetermined and fixed. I followed this belief for most of my life without questioning it. However, as I got older, I started to become more interested in exploring what gender really meant to me.
+    
+    I began to research gender identity in greater detail. I read books, articles, and watched documentaries about gender fluidity and different gender identities. I started to realize that gender was not as simple or straightforward as society made it out to be. Instead, I learned that gender was a spectrum and that self-identification was the most important factor in determining one's gender identity.
+    
+    The more I learned, the more I started to question my own gender identity. I began to examine my feelings and beliefs around gender and eventually realized that I did not completely identify with either the male or female gender binary. I identified as gender non-binary and I felt empowered to finally be able to label my gender identity.
+    
+    This realization was both liberating and empowering. I was able to accept and embrace my gender identity without fear or judgement. I was also able to share my gender identity with my family and friends and receive their support. This experience has helped me to gain more confidence in myself and my beliefs.
+    
+    By challenging the traditional belief about gender, I was able to come to a better understanding of myself and my identity. I am grateful for the opportunity to explore and discover my own gender identity and to be able to express it openly and proudly.
+    
+    This experience has helped me to become more open-minded and accepting of different beliefs and ideas. I am now eager to explore more aspects of gender identity and to continue to challenge traditional beliefs. As a student at Temple University, I hope to use my open-mindedness and curiosity to gain further knowledge and understanding of gender identity and its implications. I also plan to use my education to help bridge the gender pay gap and create more equitable working conditions for all genders.
+    
+    With my ambition, open-mindedness, and drive, I believe that I am an ideal candidate for Temple University. I am confident that the knowledge and experience I gain at Temple will help me to continue to challenge traditional beliefs and explore my own gender identity. With my passion and determination, I will be able to make my parents proud and achieve my goals of creating more equitable working conditions for all genders.
+`;
+  }
+
   //   const response = await openai.createCompletion({
   //     model: "text-davinci-003",
   //     prompt: prompt,
@@ -94,13 +125,6 @@ async function consultOpenAI(prompt: string): Promise<string> {
 
   // let text = "As a world champion kickboxer, I am used to pushing myself to the limit, always striving to reach my goals and make the most of my opportunities. This same tenacity and drive has enabled me to become a successful competitive fighter and, now, I am ready to challenge myself academically. I am confident that I can bring this same level of commitment and passion to Hustlers University. The martial arts have taught me many valuable lessons, including how to stay focused on the task at hand, how to manage my time and energy, and most importantly, how to remain humble and resilient in the face of adversity. These are all qualities that will serve me well as a student at Hustlers University. I am eager to learn from the faculty and students, to contribute my own unique perspective, and to be part of a vibrant and diverse community. My achievements in the world of kickboxing have also shown me the importance of hard work and dedication. I understand that success is a result of preparation and perseverance. I am prepared to take on the challenges of academia and have no doubt that I will be successful in achieving my goals. I am incredibly excited to take my next step in life and apply to Hustlers University. I am confident thatAs a world champion kickboxer, I am used to pushing myself to the limit, always striving to reach my goals and make the most of my opportunities. This same tenacity and drive has enabled me to become a successful competitive fighter and, now, I am ready to challenge myself academically. I am confident that I can bring this same level of commitment and passion to Hustlers University. The martial arts have taught me many valuable lessons, including how to stay focused on the task at hand, how to manage my time and energy, and most importantly, how to remain humble and resilient in the face of adversity. These are all qualities that will serve me well as a student at Hustlers University. I am eager to learn from the faculty and students, to contribute my own unique perspective, and to be part of a vibrant and diverse community. My achievements in the world of kickboxing have also shown me the importance of hard work and dedication. I understand that success is a result of preparation and perseverance. I am prepared to take on the challenges of academia and have no doubt that I will be successful in achieving my goals. I am incredibly excited to take my next step in life and apply to Hustlers University. I am confident thatAs a world champion kickboxer, I am used to pushing myself to the limit, always striving to reach my goals and make the most of my opportunities. This same tenacity and drive has enabled me to become a successful competitive fighter and, now, I am ready to challenge myself academically. I am confident that I can bring this same level of commitment and passion to Hustlers University. The martial arts have taught me many valuable lessons, including how to stay focused on the task at hand, how to manage my time and energy, and most importantly, how to remain humble and resilient in the face of adversity. These are all qualities that will serve me well as a student at Hustlers University. I am eager to learn from the faculty and students, to contribute my own unique perspective, and to be part of a vibrant and diverse community. My achievements in the world of kickboxing have also shown me the importance of hard work and dedication. I understand that success is a result of preparation and perseverance. I am prepared to take on the challenges of academia and have no doubt that I will be successful in achieving my goals. I am incredibly excited to take my next step in life and apply to Hustlers University. I am confident that"
 
-  let text = `When I was twelve years old, I experienced a tragedy that changed my life forever. My beloved cat, Daisy, passed away suddenly, and I was left feeling helpless and heartbroken. I was determined to make something positive out of this loss, and so I decided to use my entrepreneurial skills to start a business that would make it easier for people to travel with their pets.
-  
-  My business, which helps Airbnb hosts become more pet-friendly, has allowed me to use my knowledge in business and technology to make a difference in the world. I have developed a website that provides hosts with valuable information about pet-friendly rules and regulations in different cities, and I have also connected with local animal shelters to provide hosts with resources and advice on how to safely accommodate pets in their homes.
-  
-  More than anything, my business has been a reminder to me that I can still make a positive impact in the world, even in the face of tragedy. My entrepreneurial spirit has driven me to excel in my studies, and I have been able to use my business acumen to help others. I have also been able to use my business as a platform to raise awareness about pet adoption, and I have been able to connect with pets through it.
-`;
-
   return text;
 }
 
@@ -116,20 +140,37 @@ app.post("/college-essay", async (req: Request, res: Response) => {
 
     const collegeName = promptMain.collegeName;
     const prompt = promptMain.prompt;
-    const promptTopic = promptMain.promptTopic;
+    let promptTopic = promptMain.promptTopic;
     const mood = promptMain.mood;
-    const pageCount = promptMain.pageCount;
-    const writtenEssay = promptMain.writtenEssay;
-    const hobby = promptMain.hobby;
-    const hobbyTime = promptMain.hobbyTime;
-    const hobbyFav = promptMain.hobbyFav;
-    const hobbyLearned = promptMain.hobbyLearned;
-    const hobbyLeadership = promptMain.hobbyLeadership;
-    const event = promptMain.event;
-    const childhood = promptMain.childhood;
-    const anything = promptMain.anything;
+    const pageCount: string = promptMain.pageCount;
+    const reasonCollege = promptMain.writtenEssay;
+    const major = promptMain.hobby;
+    const hobby = promptMain.hobbyTime;
+    const obstacles = promptMain.hobbyFav;
+    const whoInspire = promptMain.hobbyLearned;
+    const collegePurpose = promptMain.hobbyLeadership;
+    const problemsSolved = promptMain.event;
+    const captivation = promptMain.childhood;
+    const threewords = promptMain.anything;
 
-    const constructedPrompt = `Write a college essay to ${collegeName} using the prompt ${prompt}.. Yada yada yada`;
+    if (promptTopic === "") {
+      promptTopic = "This essay is a personal statement";
+    } else {
+      promptTopic = "The prompt that my essay should answer: " + promptTopic;
+    }
+
+    const constructedPrompt = `I am writing a college essay application to ${collegeName}. 
+    I want this essay to a ${mood} mood. The essay should be ${
+      Number(pageCount) * 250
+    } words. "${promptTopic}".
+    I am ${threewords} as a student. I am interested in majoring in ${major}.
+    The reason I want to go to ${collegeName} is ${reasonCollege}.
+    What I want to achieve in ${collegeName} is ${collegePurpose}
+    My hobbies include: ${hobby}. My biggest obstacles were: ${obstacles}. I admire ${whoInspire}.
+    I am captivated by: ${captivation}. The problems I solved were : ${problemsSolved}.
+    I should be admitted into ${collegeName}. Write this essay for me. `.;
+
+    console.log(constructedPrompt);
 
     const payload: string = await consultOpenAI(constructedPrompt);
 
@@ -137,8 +178,16 @@ app.post("/college-essay", async (req: Request, res: Response) => {
       body: payload,
     });
   } catch (error: any) {
+    console.log(error);
     res.status(400).send("Rate Limiting");
   }
+});
+
+app.get("/yayornay", async (req: Request, res: Response) => {
+  apiOrNot = !apiOrNot;
+  console.log(apiOrNot);
+  const text = "it is " + (apiOrNot ? "on" : "off");
+  res.status(200).send(text);
 });
 
 //
