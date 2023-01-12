@@ -242,7 +242,7 @@ export default function Prompts() {
 												<MenuItem value="Melancholy">
 													Melancholy
 												</MenuItem>
-												<MenuItem value="Melancholy">
+												<MenuItem value="Lighthearted">
 													Lighthearted
 												</MenuItem>
 											</Select>

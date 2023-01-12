@@ -257,7 +257,7 @@ function Home() {
 			</S.Sec2Wrapper>
 
 			<S.Sec3Wrapper>
-				<S.Title>Example Essays</S.Title>
+				<S.Title2>Example Essays</S.Title2>
 				{/* <div style={{display: 'grid', gridTemplateColumns: '30vw 30vw 30vw'}}> */}
 				<S.ImageWrapper>
 					<S.Image

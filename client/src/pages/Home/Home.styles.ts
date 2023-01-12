@@ -45,6 +45,9 @@ export const Sec3Wrapper = styled.div`
   color: white;
   padding-top: 5vh;
   padding-bottom: 5vh;
+  @media (max-width: 1000px) {
+    padding-top: 0vh;
+  }
 `;
 
 export const Image = styled.img`
@@ -126,6 +129,15 @@ export const LoginWrapper = styled.div`
 export const Title = styled.h1`
   font-size: 50px;
   @media (max-width: 1000px) {
+    margin-top: 100px;
+    font-size: 37px;
+  }
+`;
+
+export const Title2 = styled.h1`
+  font-size: 50px;
+  @media (max-width: 1000px) {
+    margin-top: -130px;
     font-size: 37px;
   }
 `;

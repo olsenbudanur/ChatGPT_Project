@@ -26,14 +26,14 @@ export const OuterLayer = styled.div`
 `;
 
 export const EssayText = styled.div`
-  padding-bottom: 60px;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 
   line-height: 40px;
   @media (max-width: 1000px) {
     grid-template-columns: none;
-    width: 80%;
+    font-size: small;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 0px;
     margin-top: 0vh;

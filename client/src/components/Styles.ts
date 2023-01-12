@@ -3,6 +3,10 @@ import styled from "styled-components";
 
 export const photo = styled.img`
     width: 100%;
+    @media (max-width: 1000px) {
+      margin-top: -200px;
+      /* margin-bottom: -200px; */
+    }
 `
 
 export const stepsWrapper = styled.div`
