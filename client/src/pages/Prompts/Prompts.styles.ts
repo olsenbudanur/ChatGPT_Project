@@ -3,9 +3,7 @@ import styled from "styled-components";
 export const StepperWrapper = styled.div`
   display: grid;
   place-items: center;
-  margin: 0px auto;
-  width: 60%;
-
+  padding: 20px;
   margin-top: 50px;
 `;
 
@@ -39,7 +37,7 @@ export const Sec2Wrapper = styled.div`
   padding-bottom: 10vh;
   background-color: #ffff;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   place-items: center;
   color: black;
   @media (max-width: 900px) {
