@@ -433,7 +433,7 @@ export default function Prompts() {
 												maxLength: 400,
 											}}
 										/>
-										What is the best
+										What is the hardest
 										problem you solved?
 										<TextField
 											required
