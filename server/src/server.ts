@@ -24,6 +24,7 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+app.options("*", cors());
 
 //
 // Set up stripe
@@ -137,6 +138,8 @@ async function consultOpenAI(prompt: string): Promise<string> {
 //
 // The post request for writing a college essay.
 app.post("/college-essay", async (req: Request, res: Response) => {
+  res.set("Access-Control-Expose-Headers", "location");
+  res.set("Access-Control-Allow-Credentials", "true");
   try {
     const email = req.body.email;
 
