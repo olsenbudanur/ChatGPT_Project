@@ -14,6 +14,8 @@ dotenv.config({ path: ".env" });
 let host = "https://tutanaai.com";
 
 let apiOrNot = false;
+
+let testOrNot = true;
 // Set up express
 const app = express();
 const PORT = 8080;
@@ -34,7 +36,7 @@ app.use((req, res, next) => {
 
 //
 // Set up stripe
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
+let stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY_TEST);
 
 const storeItems = new Map([[1, { priceInCents: 499, name: "Essay" }]]);
 
@@ -206,9 +208,21 @@ app.get("/hayat", async (req: Request, res: Response) => {
     apiOrNot = !apiOrNot;
     const text = "hayat" + (apiOrNot ? "on" : "off");
     res.status(200).send(text);
-  } else {
-    res.status(400).send(`it is ${apiOrNot}`);
+  } 
+  else if (hayat === "hayat2"){
+    stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY_TEST);
+    testOrNot = true;
+    res.status(400).send(`It is for api: ${apiOrNot}. It is for pay: ${testOrNot}`);
   }
+  else if (hayat === "hayat3"){
+    stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
+    testOrNot = false;
+    res.status(400).send(`It is for api: ${apiOrNot}. It is for pay: ${testOrNot}`);
+  }
+  else {
+    res.status(400).send(`It is for api: ${apiOrNot}. It is for pay: ${testOrNot}`);
+  }
+
 });
 
 
