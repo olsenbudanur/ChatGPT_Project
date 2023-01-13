@@ -19,7 +19,7 @@ const app = express();
 const PORT = 8080;
 app.use(bodyParser.json());
 const corsOptions = {
-  origin: "*",
+  origin: "https://tutanaai.com",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };

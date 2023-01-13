@@ -41,6 +41,7 @@ function Home() {
 	const navigate = useNavigate();
 
 	const navigateToPrompt = async () => {
+		setEmail(email.toLowerCase());
 		//
 		// If logged in.
 		if (currentUser) {
