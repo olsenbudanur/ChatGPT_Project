@@ -71,7 +71,7 @@ function EssayPage() {
 			mode: "cors",
 		};
 
-		fetch("https://tutanaai.com/college-essay", requestOptions)
+		fetch("https://www.tutanaai.com/college-essay", requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
 				setLoading("none");
