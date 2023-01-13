@@ -7,5 +7,10 @@ TutanaAI was written in React.js, and Express.js. It used Firebase for authentic
 
 # Links
 Here is a video demonstrating the project: https://www.youtube.com/watch?v=ujjv1c-K-1s
+
+
 TikTok Account: https://www.tiktok.com/@tutanaai
+
+
 Website (if it is still running): https://www.tutanaai.com/
+
