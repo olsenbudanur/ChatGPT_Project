@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.d15a6fcc.css",
-    "main.js": "/static/js/main.9400c25d.js",
+    "main.js": "/static/js/main.f71378c4.js",
     "static/media/screenshot4.jpeg": "/static/media/screenshot4.1849fc37ba0b909e0287.jpeg",
     "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.b1a653db79258eeccc5d.ttf",
     "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.450a5c898f0b184b968b.ttf",
@@ -27,10 +27,10 @@
     "static/media/nunito-vietnamese-400-normal.woff2": "/static/media/nunito-vietnamese-400-normal.6a8bc7acd205391fb71a.woff2",
     "index.html": "/index.html",
     "main.d15a6fcc.css.map": "/static/css/main.d15a6fcc.css.map",
-    "main.9400c25d.js.map": "/static/js/main.9400c25d.js.map"
+    "main.f71378c4.js.map": "/static/js/main.f71378c4.js.map"
   },
   "entrypoints": [
     "static/css/main.d15a6fcc.css",
-    "static/js/main.9400c25d.js"
+    "static/js/main.f71378c4.js"
   ]
 }
