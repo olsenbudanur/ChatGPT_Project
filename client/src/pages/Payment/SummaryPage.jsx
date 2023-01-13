@@ -17,7 +17,7 @@ const exampleEssay = require("../../assets/blurEssay.png");
 
 export default function SummaryPage() {
     function pay() {
-		fetch("http://localhost:8080/create-checkout-session", {
+		fetch("https://www.tutanaai.com/create-checkout-session", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
