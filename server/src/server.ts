@@ -9,6 +9,10 @@ import path from "path";
 
 dotenv.config({ path: ".env" });
 
+
+// let host = "http://localhost:3000";
+let host = "https://tutanaai.com";
+
 let apiOrNot = true;
 // Set up express
 const app = express();
@@ -45,8 +49,8 @@ app.post("/create-checkout-session", async (req, res) => {
           quantity: item.quantity,
         };
       }),
-      success_url: "http://localhost:3000/949ff4f6-8fb1-11ed-a1eb-0242ac120002",
-      cancel_url: "http://localhost:3000/prompt",
+      success_url: host + "/949ff4f6-8fb1-11ed-a1eb-0242ac120002",
+      cancel_url: host + "/prompts",
     });
     res.json({ url: session.url });
   } catch (e: any) {
@@ -203,10 +207,11 @@ app.get("/hayat", async (req: Request, res: Response) => {
 
 app.use(express.static(path.resolve(__dirname, "../../client/build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve("../../client/build/index.html"));
+app.get("/*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../", "../", "client", "build", "index.html")
+  );
 });
-
 
 //
 // Start listening

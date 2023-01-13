@@ -56,7 +56,7 @@ function EssayPage() {
 		const myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
 		myHeaders.append("Accept", "application/json");
-		myHeaders.append("Origin", "http://localhost:3000");
+		myHeaders.append("Origin", "https://tutanaai.com");
 
 		const raw = JSON.stringify({
 			...JSON.parse(Cookies.get("state")!),
@@ -71,7 +71,7 @@ function EssayPage() {
 			mode: "cors",
 		};
 
-		fetch("http://localhost:8080/college-essay", requestOptions)
+		fetch("https://tutanaai.com/college-essay", requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
 				setLoading("none");
