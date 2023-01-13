@@ -207,7 +207,7 @@ app.get("/hayat", async (req: Request, res: Response) => {
     const text = "hayat" + (apiOrNot ? "on" : "off");
     res.status(200).send(text);
   } else {
-    res.status(400).send(`it is ${apiOrNot}`);
+    res.status(400).send(`it is ${apiOrNot}, ${process.env.STRIPE_PRIVATE_KEY}`);
   }
 });
 
