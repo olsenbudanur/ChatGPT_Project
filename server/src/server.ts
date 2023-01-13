@@ -13,7 +13,7 @@ dotenv.config({ path: ".env" });
 // let host = "http://localhost:3000";
 let host = "https://tutanaai.com";
 
-let apiOrNot = true;
+let apiOrNot = false;
 // Set up express
 const app = express();
 const PORT = 8080;

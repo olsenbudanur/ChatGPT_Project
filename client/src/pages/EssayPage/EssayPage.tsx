@@ -56,7 +56,7 @@ function EssayPage() {
 		const myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
 		myHeaders.append("Accept", "application/json");
-		myHeaders.append("Origin", "https://tutanaai.com");
+		myHeaders.append("Origin", "https://www.tutanaai.com");
 
 		const raw = JSON.stringify({
 			...JSON.parse(Cookies.get("state")!),
